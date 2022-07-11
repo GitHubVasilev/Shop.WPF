@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.WPF", "Shop.WPF\Shop.WPF.csproj", "{D376A38B-A898-4069-ABF1-E90C34807924}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.WPF", "Shop.WPF\Shop.WPF.csproj", "{D376A38B-A898-4069-ABF1-E90C34807924}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{56BB2468-D275-4D1C-894F-EF9626F1A1DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{B5A2C132-DFA5-469E-9079-7D949418015C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{D376A38B-A898-4069-ABF1-E90C34807924}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D376A38B-A898-4069-ABF1-E90C34807924}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D376A38B-A898-4069-ABF1-E90C34807924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56BB2468-D275-4D1C-894F-EF9626F1A1DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56BB2468-D275-4D1C-894F-EF9626F1A1DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56BB2468-D275-4D1C-894F-EF9626F1A1DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56BB2468-D275-4D1C-894F-EF9626F1A1DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5A2C132-DFA5-469E-9079-7D949418015C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5A2C132-DFA5-469E-9079-7D949418015C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5A2C132-DFA5-469E-9079-7D949418015C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5A2C132-DFA5-469E-9079-7D949418015C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
