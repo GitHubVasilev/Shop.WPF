@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Shop.WPF.View.UserControl
+namespace Shop.WPF.View.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для LoginControll.xaml
+    /// Логика взаимодействия для LoginControl.xaml
     /// </summary>
-    public partial class LoginControll : UserControl
+    public partial class LoginControl : UserControl
     {
-        public LoginControll()
+        public LoginControl()
         {
             InitializeComponent();
         }

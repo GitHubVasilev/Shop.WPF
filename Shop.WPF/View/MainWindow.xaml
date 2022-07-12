@@ -4,9 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shop.WPF"
+        xmlns:usersControl="clr-namespace:Shop.WPF.View.UserControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <StackPanel>
+            <StackPanel HorizontalAlignment="Right" Width="auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="MS Access"
+                               Grid.Column="0"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"/>
+                    <usersControl:ConnectDataSourceControl Grid.Column="1"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="MSSQLLocalDB"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Grid.Column="0"/>
+                    <usersControl:ConnectDataSourceControl Grid.Column="1"/>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
