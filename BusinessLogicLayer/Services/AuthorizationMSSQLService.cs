@@ -12,17 +12,17 @@ namespace BusinessLogicLayer.Services
     {
         public void Connect(AuthorizationMSSQLDataDTO dataAuthorization)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(message: "Ща все будет");
         }
 
         public void Disconect()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(message: "Ща все будет");
         }
 
         public DataConnectionDBDTO GetStatusConnect()
         {
-            throw new NotImplementedException();
+            return new DataConnectionDBDTO() { DataSourceName = "Pass", IsConnected = true };
         }
     }
 }

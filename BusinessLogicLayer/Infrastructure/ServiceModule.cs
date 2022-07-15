@@ -8,5 +8,6 @@ namespace BusinessLogicLayer.Infrastructure
 {
     internal class ServiceModule
     {
+        
     }
 }

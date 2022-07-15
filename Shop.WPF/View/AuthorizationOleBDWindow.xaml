@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="AuthorizationOleBDWindow" Height="320" Width="540">
+        Title="AuthorizationOleBDWindow"
+        Height="320"
+        Width="540"
+        DataContext="{Binding Source={StaticResource locator}, Path=AuthorizationOleDBDataVM}">
     <Grid>
         <StackPanel Orientation="Vertical"
                     VerticalAlignment="Center">
@@ -51,7 +54,9 @@
                 <Button Content="Ok"
                         Margin="5"
                         Grid.Column="0"
-                        IsDefault="True"/>
+                        IsDefault="True"
+                        Command="{Binding ConnectCommand}"
+                        Click="Button_Click"/>
                 <Button Content="Close"
                         Grid.Column="1"
                         Margin="5" 

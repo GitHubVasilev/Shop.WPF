@@ -18,9 +18,9 @@ namespace Shop.WPF.Infrastructure
 
             #region Dialogs
 
-            services.AddSingleton<IErrorDialog, ErrorDialog>();
-            services.AddSingleton<IAuthorizationOleDBDialog ,AuthorizationOleDBDialog>();
-            services.AddSingleton<IAuthorizationMSSQLDialog, AuthorizationMSSQLDialog>();
+            services.AddScoped<IErrorDialog, ErrorDialog>();
+            services.AddScoped<IAuthorizationOleDBDialog ,AuthorizationOleDBDialog>();
+            services.AddScoped<IAuthorizationMSSQLDialog, AuthorizationMSSQLDialog>();
 
             #endregion
 
@@ -35,6 +35,9 @@ namespace Shop.WPF.Infrastructure
 
             services.AddSingleton<IConnectionProvider<AuthorizationOleDBDataDTO>, DataSourceConnectOleDBVM>();
             services.AddSingleton<IConnectionProvider<AuthorizationMSSQLDataDTO>, DataSourceConnectMSSQLVM>();
+            services.AddScoped<AuthorizationMSSQLDataVM>();
+            services.AddScoped<AuthorizationOleDBDataVM>();
+
             #endregion
 
             return services.BuildServiceProvider();

@@ -19,7 +19,7 @@ namespace Shop.WPF.Dialogs
 
         public void ShowDialog()
         {
-            _dialog.Activate();
+            _dialog.ShowDialog();
         }
     }
 }

@@ -18,32 +18,18 @@ namespace Shop.WPF.ViewModel.Base
             _authorizationDBDialog = dialog;
             _authorizationService = serviceAuthorization;
             _errorDialog = errorDialog;
+            OnPropertyChanged(nameof(DataSourceName));
+            OnPropertyChanged(nameof(IsConnect));
         }
-
-        private string? _dataSourceName;
 
         public string? DataSourceName
         {
-            get { return _dataSourceName; }
-            set
-            {
-                _dataSourceName = value;
-                OnPropertyChanged();
-            }
+            get => _authorizationService.GetStatusConnect().DataSourceName;
         }
-
-        private int _isConnect;
 
         public int IsConnect
         {
-            get
-            {
-                DataConnectionDBDTO dataConnectionDBDTO = _authorizationService.GetStatusConnect();
-                _isConnect = Convert.ToInt32(dataConnectionDBDTO.IsConnected);
-                //OnPropertyChanged();
-                DataSourceName = dataConnectionDBDTO.DataSourceName;
-                return _isConnect;
-            }
+            get => Convert.ToInt32(_authorizationService.GetStatusConnect().IsConnected);
         }
 
         private RelayCommand? _connectCommand;

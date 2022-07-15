@@ -19,7 +19,7 @@ namespace Shop.WPF.ViewModel.Base
     {
         private readonly Dictionary<string, List<string>> _errors = new();
         /// <summary>
-        /// Количество ошибок в зполнении полей для модели представления
+        /// Указывает содержит ли модель ошибки
         /// </summary>
         public bool HasErrors => _errors.Count > 0;
 

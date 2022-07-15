@@ -20,6 +20,12 @@ namespace Shop.WPF.Infrastructure
             (_locator.GetRequiredService<IConnectionProvider<AuthorizationOleDBDataDTO>>() as DataSourceConnectOleDBVM)!;
 
         public DataSourceConnectMSSQLVM DataSourceMSSQLVM =>
-            (_locator.GetRequiredService<IConnectionProvider<AuthorizationOleDBDataDTO>>() as DataSourceConnectMSSQLVM)!;
+            (_locator.GetRequiredService<IConnectionProvider<AuthorizationMSSQLDataDTO>>() as DataSourceConnectMSSQLVM)!;
+
+        public AuthorizationOleDBDataVM AuthorizationOleDBDataVM =>
+            _locator.GetRequiredService<AuthorizationOleDBDataVM>();
+
+        public AuthorizationMSSQLDataVM AuthorizationMSSQLDataVM =>
+            _locator.GetRequiredService<AuthorizationMSSQLDataVM>();
     }
 }

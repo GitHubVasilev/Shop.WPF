@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shop.WPF.View"
         mc:Ignorable="d"
-        Title="AuthorizationMSSQLWindow" Height="320" Width="540">
+        Title="AuthorizationMSSQLWindow"
+        Height="320"
+        Width="540"
+        DataContext="{Binding Source={StaticResource locator}, Path=AuthorizationMSSQLDataVM}">
     <Grid>
         <StackPanel Orientation="Vertical" 
                     VerticalAlignment="Center">
@@ -20,7 +23,8 @@
                            Grid.Column="0"
                            Style="{StaticResource BaseTextBlock}"
                            />
-                <TextBox Grid.Column="1" />
+                <TextBox Grid.Column="1"
+                         Text="{Binding DataSourceName, ValidatesOnNotifyDataErrors=True}"/>
             </Grid>
             <Grid Margin="20">
                 <Grid.ColumnDefinitions>
@@ -30,7 +34,9 @@
                 <Button Content="Ok"
                         Margin="5"
                         Grid.Column="0"
-                        IsDefault="True"/>
+                        IsDefault="True"
+                        Command="{Binding ConnectCommand}" 
+                        Click="Button_Click"/>
                 <Button Content="Close"
                         Grid.Column="1"
                         Margin="5" 
