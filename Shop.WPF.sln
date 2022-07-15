@@ -4,10 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.WPF", "Shop.WPF\Shop.WPF.csproj", "{D376A38B-A898-4069-ABF1-E90C34807924}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56BB2468-D275-4D1C-894F-EF9626F1A1DD} = {56BB2468-D275-4D1C-894F-EF9626F1A1DD}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{56BB2468-D275-4D1C-894F-EF9626F1A1DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{56BB2468-D275-4D1C-894F-EF9626F1A1DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{B5A2C132-DFA5-469E-9079-7D949418015C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{B5A2C132-DFA5-469E-9079-7D949418015C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

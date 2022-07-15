@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BusinessLogicLayer.DataTransferObject;
 
 namespace BusinessLogicLayer.Interfaces
 {
-    public interface IAuthorizationService
+    public interface IAuthorizationService<T> where T : BaseAuthorizationDB
     {
-        void Authorization();
+        void Connect(T dataAuthorization);
+        void Disconect();
+        DataConnectionDBDTO GetStatusConnect();
     }
 }

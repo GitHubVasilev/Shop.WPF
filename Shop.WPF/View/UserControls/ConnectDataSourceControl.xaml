@@ -4,21 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="40" d:DesignWidth="250">
+             d:DesignHeight="40" 
+             d:DesignWidth="250">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <Button Content="Connect" Margin="5"/>
-            <Button Content="Disconnect" Margin="5"/>
+            <Button Content="Connect"
+                    Margin="5"
+                    Command="{Binding Path=ConnectCommand}"/>
+            <Button Content="Disconnect"
+                    Margin="5"
+                    Command="{Binding Path=DisconnectCommand}"/>
             <ProgressBar 
                     Width="15"
                     Height="15"
                     Margin="5"
                     Minimum="0"
                     Maximum="1"
-                    Value="1"
+                    Value="{Binding IsConnect, Mode=OneWay}"
                     Background="Red"
                     BorderThickness="0"/>
-            <TextBlock Text=""/>
+            <Border HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    BorderThickness="0">
+                <TextBlock Text="{Binding DataSourceName}"/>
+            </Border>
         </StackPanel>  
     </Grid>
 </UserControl>

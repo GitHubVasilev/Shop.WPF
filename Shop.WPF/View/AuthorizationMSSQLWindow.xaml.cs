@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Shop.WPF.View.UserControls
+namespace Shop.WPF.View
 {
     /// <summary>
-    /// Логика взаимодействия для LoginControl.xaml
+    /// Логика взаимодействия для AuthorizationMSSQLWindow.xaml
     /// </summary>
-    public partial class LoginControl : UserControl
+    public partial class AuthorizationMSSQLWindow : Window
     {
-        public LoginControl()
+        public AuthorizationMSSQLWindow()
         {
             InitializeComponent();
         }

@@ -19,7 +19,8 @@
                                Grid.Column="0"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Right"/>
-                    <usersControl:ConnectDataSourceControl Grid.Column="1"/>
+                    <usersControl:ConnectDataSourceControl Grid.Column="1"
+                                                           DataContext="{Binding Path=DataSourceOleDBVM, Source={StaticResource locator}}"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
