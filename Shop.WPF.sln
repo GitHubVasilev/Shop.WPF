@@ -9,6 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.WPF", "Shop.WPF\Shop.W
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{56BB2468-D275-4D1C-894F-EF9626F1A1DD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B5A2C132-DFA5-469E-9079-7D949418015C} = {B5A2C132-DFA5-469E-9079-7D949418015C}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{B5A2C132-DFA5-469E-9079-7D949418015C}"
 EndProject
