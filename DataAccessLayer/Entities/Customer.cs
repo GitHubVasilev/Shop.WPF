@@ -1,8 +1,9 @@
-﻿namespace DataAccessLayer.Entities
+﻿using System;
+
+namespace DataAccessLayer.Entities
 {
-    public record class Customer
+    public record class Customer : BaseEntity
     {
-        public Guid Id { get; init; }
         public string? Name { get; init; }
         public string? LastName { get; init; }
         public string? Patronymic { get; init; }

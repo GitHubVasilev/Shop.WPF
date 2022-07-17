@@ -1,20 +1,23 @@
-﻿using DataAccessLayer.Repositories;
+﻿using DataAccessLayer.Entities;
+using DataAccessLayer.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace DataAccessLayer.Contexts
 {
-    internal class OrderMSSQLContext : IMSSQLContext, IDisposable
+    internal class OrderMSSQLContext : IMSSQLContext<Order>, IDisposable
     {
+        private readonly SqlConnection _connection;
+
         public OrderMSSQLContext()
         {
-            Connection = new();
+            _connection = new();
         }
 
-        public SqlConnection Connection { get; }
+        public bool IsEnabled => _connection.State > 0;
 
-        public bool IsEnabled => Connection.State > 0;
-
-        public string DatabaseName => Connection.Database;
+        public string DatabaseName => _connection.Database;
 
         public void Connect(string initialCatalog)
         {
@@ -26,18 +29,47 @@ namespace DataAccessLayer.Contexts
                 Pooling = true
             };
 
-            Connection.ConnectionString = connectionString.ConnectionString;
-            Connection.Open();
+            _connection.ConnectionString = connectionString.ConnectionString;
+            _connection.Open();
         }
 
         public void Disconnect()
         {
-            Connection.Close();
+            _connection.Close();
+        } 
+
+        public IEnumerable<Order> GetTable()
+        {
+            SqlCommand command = new("SELECT * FROM Orders", _connection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            List<Order> result = new();
+
+            while (reader.Read()) 
+            {
+                result.Add(new Order() 
+                {
+                    UID = reader.GetGuid(0),
+                    EmailCustomer = reader.GetString(1),
+                    Atricle = reader.GetInt32(2),
+                    NameProduct = reader.GetString(3),
+                });
+            }
+
+            return result;
+
+        }
+
+        public void RunCommand(string command)
+        {
+            SqlCommand cmd = new(command, _connection);
+
+            cmd.ExecuteNonQuery();
         }
 
         public void Dispose()
         {
-            Connection.Close();
+            _connection.Close();
         }
     }
 }
