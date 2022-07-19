@@ -21,15 +21,15 @@ namespace DataAccessLayer.Contexts
 
         public void Connect(string initialCatalog)
         {
-            SqlConnectionStringBuilder connectionString = new SqlConnectionStringBuilder()
-            {
-                DataSource = @"(localDB)\MSSQLLocalDB",
-                InitialCatalog = initialCatalog,
-                IntegratedSecurity = false,
-                Pooling = true
-            };
+            //SqlConnectionStringBuilder connectionString = new SqlConnectionStringBuilder()
+            //{
+            //    DataSource = @"(localDB)\MSSQLLocalDB",
+            //    InitialCatalog = initialCatalog,
+            //    IntegratedSecurity = false,
+            //    Pooling = true
+            //};
 
-            _connection.ConnectionString = connectionString.ConnectionString;
+            _connection.ConnectionString = initialCatalog;
             _connection.Open();
         }
 

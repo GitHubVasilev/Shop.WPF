@@ -5,8 +5,9 @@ using Shop.WPF.Interfaces;
 using Shop.WPF.Dialogs;
 using BusinessLogicLayer.Services;
 using BusinessLogicLayer.Interfaces;
-
 using Shop.WPF.ViewModel;
+using BusinessLogicLayer.Infrastructure;
+using System.Collections.Generic;
 
 namespace Shop.WPF.Infrastructure
 {
@@ -15,6 +16,13 @@ namespace Shop.WPF.Infrastructure
         public IServiceProvider CreateHostBuilder()
         {
             ServiceCollection services = new ServiceCollection();
+            
+            ServiceCollection serviceModule = new ServiceModule().CreateHostBuilder();
+
+            foreach (var a in serviceModule) 
+            {
+                ((ICollection<ServiceDescriptor>)services).Add(a);
+            }
 
             #region Dialogs
 

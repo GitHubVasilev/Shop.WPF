@@ -21,9 +21,12 @@ namespace DataAccessLayer.Contexts
 
         public void Connect(string initalCatalog, string login, string password) 
         {
-            string connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={initalCatalog};Persist Security Info=True";
-
-            _connection.ConnectionString = connectionString;
+            //OleDbConnectionStringBuilder connectionString = new OleDbConnectionStringBuilder()
+            //{
+            //    Provider = @"Microsoft.ACE.OLEDB.12.0",
+            //    DataSource = $"{initalCatalog}",
+            //};
+            _connection.ConnectionString = initalCatalog;
 
             _connection.Open();
         }

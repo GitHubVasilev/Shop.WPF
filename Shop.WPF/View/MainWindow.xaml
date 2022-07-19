@@ -36,6 +36,7 @@
                         Grid.Column="1"/>
                 </Grid>
             </StackPanel>
+            <usersControl:CustomersControl/>
         </StackPanel>
     </Grid>
 </Window>

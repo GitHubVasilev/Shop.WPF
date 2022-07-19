@@ -22,6 +22,7 @@ namespace Shop.WPF.ViewModel.Base
             OnPropertyChanged(nameof(IsConnect));
         }
 
+
         public string? DataSourceName
         {
             get => _authorizationService.GetStatusConnect().DataSourceName;
@@ -39,6 +40,8 @@ namespace Shop.WPF.ViewModel.Base
             get => _connectCommand ??= new RelayCommand(obj =>
             {
                 _authorizationDBDialog.ShowDialog();
+                OnPropertyChanged(nameof(DataSourceName));
+                OnPropertyChanged(nameof(IsConnect));
             }, _ => IsConnect == 0);
         }
 
@@ -51,6 +54,8 @@ namespace Shop.WPF.ViewModel.Base
                 try
                 {
                     _authorizationService.Disconect();
+                    OnPropertyChanged(nameof(DataSourceName));
+                    OnPropertyChanged(nameof(IsConnect));
                 }
                 catch (Exception e)
                 {

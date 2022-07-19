@@ -9,6 +9,7 @@ namespace DataAccessLayer.Interfaces
         void Connect(string initialCatalog);
         void Disconnect();
         bool IsEnabled { get; }
+        string DatabaseName { get; }
         IEnumerable<T> GetTable();
         void RunCommand(string command);
     }

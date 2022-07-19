@@ -1,13 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataAccessLayer.Interfaces;
+using DataAccessLayer.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BusinessLogicLayer.Infrastructure
 {
-    internal class ServiceModule
+    public class ServiceModule
     {
-        
+        public ServiceCollection CreateHostBuilder() 
+        {
+            ServiceCollection services = new ServiceCollection();
+
+            services.AddSingleton<IUnitOfWork, UnitOfWork>();
+
+            return services;
+        }
+            
     }
 }

@@ -5,7 +5,7 @@ using System;
 
 namespace DataAccessLayer.Repositories
 {
-    internal class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
 
         private IRepository<Customer>? _customerRepository;
