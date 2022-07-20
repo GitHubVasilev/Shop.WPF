@@ -18,19 +18,38 @@ namespace Shop.WPF.ViewModel.Base
             _authorizationDBDialog = dialog;
             _authorizationService = serviceAuthorization;
             _errorDialog = errorDialog;
+            DataSourceName = _authorizationService.GetStatusConnect().DataSourceName;
+            IsConnect = Convert.ToInt32(_authorizationService.GetStatusConnect().IsConnected)
+            _authorizationService.ConnectionEvent += ConnectionOrDisconnection;
+            _authorizationService.DisconnectonEvent += ConnectionOrDisconnection;
+        }
+
+        private void ConnectionOrDisconnection(IAuthorizationService<T> sender, DataConnectionDBDTO eventArgs)
+        {
             OnPropertyChanged(nameof(DataSourceName));
             OnPropertyChanged(nameof(IsConnect));
         }
 
-
+        private string? _dataSourceName;
         public string? DataSourceName
         {
-            get => _authorizationService.GetStatusConnect().DataSourceName;
+            get => _dataSourceName;
+            set 
+            {
+                _dataSourceName = value;
+                OnPropertyChanged();
+            }
         }
 
+        private int _isConnect;
         public int IsConnect
         {
-            get => Convert.ToInt32(_authorizationService.GetStatusConnect().IsConnected);
+            get => _isConnect;
+            set 
+            {
+                _isConnect = value;
+                OnPropertyChanged();
+            }
         }
 
         private RelayCommand? _connectCommand;
@@ -40,8 +59,6 @@ namespace Shop.WPF.ViewModel.Base
             get => _connectCommand ??= new RelayCommand(obj =>
             {
                 _authorizationDBDialog.ShowDialog();
-                OnPropertyChanged(nameof(DataSourceName));
-                OnPropertyChanged(nameof(IsConnect));
             }, _ => IsConnect == 0);
         }
 
@@ -54,8 +71,6 @@ namespace Shop.WPF.ViewModel.Base
                 try
                 {
                     _authorizationService.Disconect();
-                    OnPropertyChanged(nameof(DataSourceName));
-                    OnPropertyChanged(nameof(IsConnect));
                 }
                 catch (Exception e)
                 {
@@ -63,5 +78,7 @@ namespace Shop.WPF.ViewModel.Base
                 }
             }, _ => IsConnect == 1);
         }
+
+        
     }
 }

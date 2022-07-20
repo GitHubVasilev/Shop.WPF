@@ -3,6 +3,7 @@ using BusinessLogicLayer.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.WPF.Interfaces;
 using Shop.WPF.ViewModel;
+using Shop.WPF.ViewModel.Customers;
 using System;
 
 namespace Shop.WPF.Infrastructure
