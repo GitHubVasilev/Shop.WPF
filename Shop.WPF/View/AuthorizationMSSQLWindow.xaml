@@ -24,7 +24,8 @@
                            Style="{StaticResource BaseTextBlock}"
                            />
                 <TextBox Grid.Column="1"
-                         Text="{Binding DataSourceName, ValidatesOnNotifyDataErrors=True}"/>
+                         Text="{Binding DataSourceName, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         TextWrapping="Wrap"/>
             </Grid>
             <Grid Margin="20">
                 <Grid.ColumnDefinitions>

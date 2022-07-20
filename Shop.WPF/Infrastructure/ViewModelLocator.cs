@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.DataTransferObject;
+using BusinessLogicLayer.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.WPF.Interfaces;
 using Shop.WPF.ViewModel;
@@ -13,7 +14,7 @@ namespace Shop.WPF.Infrastructure
         public ViewModelLocator()
         {
             IocConfiguration locator = new IocConfiguration();
-            _locator = locator.CreateHostBuilder();
+            _locator = locator.CreateHostBuilder(new ServiceModule().CreateHostBuilder());
         }
 
         public DataSourceConnectOleDBVM DataSourceOleDBVM =>

@@ -6,23 +6,15 @@ using Shop.WPF.Dialogs;
 using BusinessLogicLayer.Services;
 using BusinessLogicLayer.Interfaces;
 using Shop.WPF.ViewModel;
-using BusinessLogicLayer.Infrastructure;
-using System.Collections.Generic;
+using BusinessLogicLayer.DataTransferObject.Entitys;
 
 namespace Shop.WPF.Infrastructure
 {
     internal class IocConfiguration
     {
-        public IServiceProvider CreateHostBuilder()
+        public IServiceProvider CreateHostBuilder(IServiceCollection services) 
         {
-            ServiceCollection services = new ServiceCollection();
-            
-            ServiceCollection serviceModule = new ServiceModule().CreateHostBuilder();
-
-            foreach (var a in serviceModule) 
-            {
-                ((ICollection<ServiceDescriptor>)services).Add(a);
-            }
+            services ??= new ServiceCollection();
 
             #region Dialogs
 
@@ -36,6 +28,8 @@ namespace Shop.WPF.Infrastructure
 
             services.AddScoped<IAuthorizationService<AuthorizationOleDBDataDTO>, AuthorizationOleDBService>();
             services.AddScoped<IAuthorizationService<AuthorizationMSSQLDataDTO>, AuthorizationMSSQLService>();
+            services.AddScoped<IService<OrderDTO>, OrderService>();
+            services.AddScoped<IService<CustomerDTO>, CustomersService>();
 
             #endregion
 

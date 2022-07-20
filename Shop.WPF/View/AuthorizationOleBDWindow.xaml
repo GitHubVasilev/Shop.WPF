@@ -23,7 +23,7 @@
                            Style="{StaticResource BaseTextBlock}"
                            />
                 <TextBox Grid.Column="1"
-                         Text="{Binding DataSourceName}"/>
+                         Text="{Binding DataSourceName, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
@@ -35,7 +35,7 @@
                            Style="{StaticResource BaseTextBlock}"
                            />
                 <TextBox Grid.Column="1" 
-                         Text="{Binding Login}" />
+                         Text="{Binding Login, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
@@ -47,7 +47,7 @@
                            Style="{StaticResource BaseTextBlock}"
                            />
                 <TextBox Grid.Column="1"
-                         Text="{Binding Password}" />
+                         Text="{Binding Password, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
             <Grid Margin="20">
                 <Grid.ColumnDefinitions>
