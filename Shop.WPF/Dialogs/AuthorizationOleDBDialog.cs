@@ -1,4 +1,4 @@
-﻿using Shop.WPF.Interfaces;
+﻿using Shop.WPF.Interfaces.Dialogs;
 using Shop.WPF.View;
 
 namespace Shop.WPF.Dialogs

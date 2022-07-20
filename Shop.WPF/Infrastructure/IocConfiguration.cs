@@ -18,9 +18,7 @@ namespace Shop.WPF.Infrastructure
 
             #region Dialogs
 
-            services.AddScoped<IErrorDialog, ErrorDialog>();
-            services.AddScoped<IAuthorizationOleDBDialog ,AuthorizationOleDBDialog>();
-            services.AddScoped<IAuthorizationMSSQLDialog, AuthorizationMSSQLDialog>();
+            services.AddSingleton<IDialogsConteiner, DialogsConteiner>();
 
             #endregion
 
