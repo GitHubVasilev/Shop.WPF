@@ -2,15 +2,8 @@
 using BusinessLogicLayer.DataTransferObject.Entitys;
 using BusinessLogicLayer.Interfaces;
 using Shop.WPF.Infrastructure;
-using Shop.WPF.Interfaces;
 using Shop.WPF.ViewModel.Base;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shop.WPF.ViewModel.Customers
 {
@@ -28,7 +21,6 @@ namespace Shop.WPF.ViewModel.Customers
             Customers = new();
             _connectionService.DisconnectonEvent += ConnectionOrDisconection;
             _connectionService.ConnectionEvent += ConnectionOrDisconection;
-            Customers = new List<CustomerVM>();
         }
 
         private void ConnectionOrDisconection(IAuthorizationService<AuthorizationOleDBDataDTO> sender, DataConnectionDBDTO eventArgs)
@@ -38,10 +30,10 @@ namespace Shop.WPF.ViewModel.Customers
 
         private bool _isConnect;
 
-        private List<CustomerVM> _customers;
+        private List<CustomerVM>? _customers;
         public List<CustomerVM> Customers
         {
-            get => _customers;
+            get => _customers ?? new List<CustomerVM>();
             set 
             {
                 _customers = value;
@@ -51,7 +43,7 @@ namespace Shop.WPF.ViewModel.Customers
 
         private RelayCommand? _addCustomer;
 
-        public RelayCommand AddCustomer 
+        public RelayCommand AddCustomerCommand
         {
             get => _addCustomer ??= new RelayCommand(obj =>
             {
@@ -61,7 +53,7 @@ namespace Shop.WPF.ViewModel.Customers
 
         private RelayCommand? _propertyCustomer;
 
-        public RelayCommand PropertyCustomer
+        public RelayCommand PropertyCustomerCommand
         {
             get => _propertyCustomer ??= new RelayCommand(obj =>
             {
@@ -71,7 +63,7 @@ namespace Shop.WPF.ViewModel.Customers
 
         private RelayCommand? _clearTables;
 
-        public RelayCommand ClearTables
+        public RelayCommand ClearTablesCommand
         {
             get => _clearTables ??= new RelayCommand(obj =>
             {
