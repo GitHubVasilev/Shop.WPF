@@ -17,6 +17,11 @@ namespace BusinessLogicLayer.Services
             _mapper = mapperFactory.CustomerMapper;
         }
 
+        public void Crear()
+        {
+            _repository.Clear();
+        }
+
         public void Create(CustomerDTO entity)
         {
             _repository.Insert(_mapper.Map<Customer>(entity));
