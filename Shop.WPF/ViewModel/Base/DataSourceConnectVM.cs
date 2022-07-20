@@ -25,8 +25,8 @@ namespace Shop.WPF.ViewModel.Base
 
         protected void ConnectionOrDisconnection(IAuthorizationService<T> sender, DataConnectionDBDTO eventArgs)
         {
-            OnPropertyChanged(nameof(DataSourceName));
-            OnPropertyChanged(nameof(IsConnect));
+            DataSourceName = eventArgs.DataSourceName;
+            IsConnect = Convert.ToInt32(eventArgs.IsConnected);
         }
 
         private string? _dataSourceName;

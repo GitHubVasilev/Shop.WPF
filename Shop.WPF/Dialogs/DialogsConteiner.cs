@@ -9,10 +9,10 @@ namespace Shop.WPF.Dialogs
 {
     internal class DialogsConteiner : IDialogsConteiner
     {
-        public IAuthorizationOleDBDialog AuthorizationDBDialog => new AuthorizationOleDBDialog();
+        public IAuthorizationOleDBDialog AuthorizationOleDBDialog => new AuthorizationOleDBDialog();
 
-        public IAuthorizationMSSQLDialog AuthorizationMSSQLDialog => throw new NotImplementedException();
+        public IAuthorizationMSSQLDialog AuthorizationMSSQLDialog => new AuthorizationMSSQLDialog();
 
-        public IErrorDialog ErrorDialog => throw new NotImplementedException();
+        public IErrorDialog ErrorDialog => new ErrorDialog();
     }
 }

@@ -7,6 +7,7 @@ using BusinessLogicLayer.Services;
 using BusinessLogicLayer.Interfaces;
 using Shop.WPF.ViewModel;
 using BusinessLogicLayer.DataTransferObject.Entitys;
+using Shop.WPF.Interfaces.Dialogs;
 
 namespace Shop.WPF.Infrastructure
 {
@@ -35,8 +36,8 @@ namespace Shop.WPF.Infrastructure
 
             services.AddSingleton<IConnectionProvider<AuthorizationOleDBDataDTO>, DataSourceConnectOleDBVM>();
             services.AddSingleton<IConnectionProvider<AuthorizationMSSQLDataDTO>, DataSourceConnectMSSQLVM>();
-            services.AddScoped<AuthorizationMSSQLDataVM>();
-            services.AddScoped<AuthorizationOleDBDataVM>();
+            services.AddTransient<AuthorizationMSSQLDataVM>();
+            services.AddTransient<AuthorizationOleDBDataVM>();
 
             #endregion
 

@@ -2,7 +2,7 @@
 {
     internal interface IDialogsConteiner
     {
-        IAuthorizationOleDBDialog AuthorizationDBDialog { get; }
+        IAuthorizationOleDBDialog AuthorizationOleDBDialog { get; }
         IAuthorizationMSSQLDialog AuthorizationMSSQLDialog { get; }
         IErrorDialog ErrorDialog { get; }
     }

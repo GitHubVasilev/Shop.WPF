@@ -18,7 +18,7 @@ namespace Shop.WPF.ViewModel
             get => _connectCommand ??= new RelayCommand(obj =>
             {
                 _dialogsConteiner.AuthorizationMSSQLDialog.ShowDialog();
-            }, _ => IsConnect > 0);
+            }, _ => IsConnect == 0);
         }
     }
 }
