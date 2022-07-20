@@ -3,7 +3,7 @@ using BusinessLogicLayer.DataTransferObject.Entitys;
 using BusinessLogicLayer.Infrastructure.ConvertersMapper;
 using DataAccessLayer.Entities;
 
-namespace BusinessLogicLayer.Infrastructure.MapperConfiguration
+namespace BusinessLogicLayer.Infrastructure.MapperConfig
 {
     internal class OrderMapperConfiguration : Profile
     {

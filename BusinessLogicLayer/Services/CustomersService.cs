@@ -1,4 +1,5 @@
-﻿using BusinessLogicLayer.DataTransferObject.Entitys;
+﻿using AutoMapper;
+using BusinessLogicLayer.DataTransferObject.Entitys;
 using BusinessLogicLayer.Interfaces;
 using DataAccessLayer.Entities;
 using DataAccessLayer.Interfaces;

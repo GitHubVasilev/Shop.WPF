@@ -4,7 +4,7 @@ using BusinessLogicLayer.Infrastructure.ConvertersMapper;
 using DataAccessLayer.Entities;
 
 
-namespace BusinessLogicLayer.Infrastructure.MapperConfiguration
+namespace BusinessLogicLayer.Infrastructure.MapperConfig
 {
     internal class CustomerMapperConfiguration : Profile
     {
