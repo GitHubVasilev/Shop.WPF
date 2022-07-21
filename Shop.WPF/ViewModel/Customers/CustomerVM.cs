@@ -59,14 +59,20 @@ namespace Shop.WPF.ViewModel.Customers
         public string? Email
         {
             get => _email;
-            set => Set(ref _patronymic, value, nameof(Email));
+            set => Set(ref _email, value, nameof(Email));
         }
 
-        private int? _phone;
-        public int? Phone
+        private string? _phone;
+        public string? Phone
         {
             get => _phone;
             set => Set(ref _phone, value, nameof(Phone));
         }
+
+        public string? EmailErrors => GetErrorsString(nameof(Email));
+        public string? NameErrors => GetErrorsString(nameof(Name));
+        public string? LastnameErrors => GetErrorsString(nameof(Lastname));
+        public string? PatronymicErrors => GetErrorsString(nameof(Patronymic));
+        public string? PhoneErrors => GetErrorsString(nameof(Phone));
     }
 }

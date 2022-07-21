@@ -8,6 +8,7 @@
             <lctr:ViewModelLocator x:Key="locator"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source=".\View\Styles\BaseTextBlock.xaml"/>
+                <ResourceDictionary Source=".\View\Styles\ErrorText.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         

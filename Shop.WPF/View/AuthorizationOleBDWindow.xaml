@@ -5,23 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="AuthorizationOleBDWindow"
-        Height="320"
-        Width="540"
+        Height="180"
+        Width="300"
         DataContext="{Binding Source={StaticResource locator}, Path=AuthorizationOleDBDataVM}">
     <Grid>
         <StackPanel Orientation="Vertical"
                     VerticalAlignment="Center">
-            <TextBlock Text="Authorization"
-                       Style="{StaticResource BaseTextBlock}"/>
+            <TextBlock Text="Authorization"/>
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="String Conntection: "
-                           Grid.Column="0"
-                           Style="{StaticResource BaseTextBlock}"
-                           />
+                           Grid.Column="0"/>
                 <TextBox Grid.Column="1"
                          Text="{Binding DataSourceName, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
@@ -31,9 +28,7 @@
                     <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Login: "
-                           Grid.Column="0"
-                           Style="{StaticResource BaseTextBlock}"
-                           />
+                           Grid.Column="0"/>
                 <TextBox Grid.Column="1" 
                          Text="{Binding Login, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
@@ -43,13 +38,11 @@
                     <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Password: "
-                           Grid.Column="0"
-                           Style="{StaticResource BaseTextBlock}"
-                           />
+                           Grid.Column="0"/>
                 <TextBox Grid.Column="1"
                          Text="{Binding Password, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
-            <Grid Margin="20">
+            <Grid Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="5*"/>

@@ -47,11 +47,11 @@ namespace DataAccessLayer.Contexts
             {
                 result.Add(new Customer()
                 {
-                    UID = reader.GetGuid(0),
+                    UID = new Guid(reader.GetString(0)),
                     Name = reader.GetString(1),
                     LastName = reader.GetString(2),
                     Patronymic = reader.GetString(3),
-                    Phone = reader.GetInt32(4),
+                    Phone = reader.GetString(4),
                     Email = reader.GetString(5),
                 });
             }

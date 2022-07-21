@@ -30,6 +30,10 @@ namespace Shop.WPF.Infrastructure
         public AuthorizationMSSQLDataVM AuthorizationMSSQLDataVM =>
             _locator.GetRequiredService<AuthorizationMSSQLDataVM>();
 
-        public CustomersVM CustomersVM;
+        public AddCustomerVM AddCustomersVM =>
+            _locator.GetRequiredService<AddCustomerVM>();
+
+        public CustomersVM CustomersVM =>
+            _locator.GetRequiredService<CustomersVM>();
     }
 }

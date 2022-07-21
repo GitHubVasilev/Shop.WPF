@@ -38,6 +38,14 @@ namespace Shop.WPF.ViewModel.Base
             return _errors.ContainsKey(propertyName ?? string.Empty) ? _errors[propertyName ?? string.Empty] : new List<string>();
         }
 
+        public string GetErrorsString(string? propertyName)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (string field in GetErrors(propertyName)) 
+            { stringBuilder.AppendLine(field); }
+            return stringBuilder.ToString();
+        }
+
         /// <summary>
         /// Устанавлиеат значение для свойства и оповещает об изменении
         /// </summary>

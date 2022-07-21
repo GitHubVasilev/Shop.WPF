@@ -38,5 +38,6 @@
             </StackPanel>
             <usersControl:CustomersControl/>
         </StackPanel>
+        
     </Grid>
 </Window>

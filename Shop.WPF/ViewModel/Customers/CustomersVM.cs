@@ -2,8 +2,9 @@
 using BusinessLogicLayer.DataTransferObject.Entitys;
 using BusinessLogicLayer.Interfaces;
 using Shop.WPF.Infrastructure;
+using Shop.WPF.Interfaces.Dialogs;
 using Shop.WPF.ViewModel.Base;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Shop.WPF.ViewModel.Customers
 {
@@ -11,11 +12,14 @@ namespace Shop.WPF.ViewModel.Customers
     {
         private readonly IService<CustomerDTO> _service;
         private readonly IAuthorizationService<AuthorizationOleDBDataDTO> _connectionService;
+        private readonly IDialogsConteiner _dialogs;
 
         public CustomersVM(
             IService<CustomerDTO> service,
-            IAuthorizationService<AuthorizationOleDBDataDTO> authorizationService)
+            IAuthorizationService<AuthorizationOleDBDataDTO> authorizationService,
+            IDialogsConteiner dialogsConteiner)
         {
+            _dialogs = dialogsConteiner;
             _service = service;
             _connectionService = authorizationService;
             Customers = new();
@@ -26,17 +30,37 @@ namespace Shop.WPF.ViewModel.Customers
         private void ConnectionOrDisconection(IAuthorizationService<AuthorizationOleDBDataDTO> sender, DataConnectionDBDTO eventArgs)
         {
             _isConnect = _isConnect == true ? false : true;
+            if(_isConnect)
+            {
+                Customers = new ObservableCollection<CustomerVM>();
+                foreach (CustomerDTO customer in _service.Get()) 
+                {
+                    Customers.Add(new CustomerVM(customer));
+                }
+            }
         }
 
         private bool _isConnect;
 
-        private List<CustomerVM>? _customers;
-        public List<CustomerVM> Customers
+        private ObservableCollection<CustomerVM>? _customers;
+        public ObservableCollection<CustomerVM> Customers
         {
-            get => _customers ?? new List<CustomerVM>();
+            get => _customers ?? new ObservableCollection<CustomerVM>();
             set 
             {
                 _customers = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private CustomerVM? _selectedCustomer;
+
+        public CustomerVM? SelectedCustomer 
+        {
+            get => _selectedCustomer;
+            set 
+            {
+                _selectedCustomer = value;
                 OnPropertyChanged();
             }
         }
@@ -47,7 +71,7 @@ namespace Shop.WPF.ViewModel.Customers
         {
             get => _addCustomer ??= new RelayCommand(obj =>
             {
-                
+                _dialogs.AddCustomerDialog.ShowDialog();
             }, _ => _isConnect);
         }
 
@@ -67,7 +91,10 @@ namespace Shop.WPF.ViewModel.Customers
         {
             get => _clearTables ??= new RelayCommand(obj =>
             {
-                
+                IWarningDialog dialog = _dialogs.WarningDialog;
+                dialog.ShowDialog("Do you need to delete all customers?");
+                if (dialog.ResultDialog() ?? false) 
+                { _service.Crear(); }
             }, _ => _isConnect);
         }
     }

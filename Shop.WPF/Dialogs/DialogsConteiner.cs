@@ -1,9 +1,4 @@
 ﻿using Shop.WPF.Interfaces.Dialogs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shop.WPF.Dialogs
 {
@@ -14,5 +9,9 @@ namespace Shop.WPF.Dialogs
         public IAuthorizationMSSQLDialog AuthorizationMSSQLDialog => new AuthorizationMSSQLDialog();
 
         public IErrorDialog ErrorDialog => new ErrorDialog();
+
+        public IWarningDialog WarningDialog => new WarningDialog();
+
+        public IAddCustomerDialog AddCustomerDialog => new AddCustomerDialog();
     }
 }
