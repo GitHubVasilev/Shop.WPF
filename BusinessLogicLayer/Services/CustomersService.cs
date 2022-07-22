@@ -9,17 +9,20 @@ namespace BusinessLogicLayer.Services
     public class CustomersService : IService<CustomerDTO>
     {
         private IRepository<Customer> _repository;
+        private IRepository<Order> _repositoryOrder;
         private IMapper _mapper;
 
         public CustomersService(IUnitOfWork uof, IMapperFactory mapperFactory)
         {
             _repository = uof.Customers;
             _mapper = mapperFactory.CustomerMapper;
+            _repositoryOrder = uof.Orders;
         }
 
         public void Crear()
         {
-            _repository.Clear();
+            _repositoryOrder.Clear();
+            _repository.Clear();  
         }
 
         public void Create(CustomerDTO entity)

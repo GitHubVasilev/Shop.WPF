@@ -7,11 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel>
-            <StackPanel HorizontalAlignment="Right" Width="auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="85*"/>
+            </Grid.RowDefinitions>
+            <StackPanel HorizontalAlignment="Right"
+                        Width="auto"
+                        Grid.Row="0">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="MS Access"
@@ -24,7 +30,7 @@
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="MSSQLLocalDB"
@@ -36,8 +42,8 @@
                         Grid.Column="1"/>
                 </Grid>
             </StackPanel>
-            <usersControl:CustomersControl/>
-        </StackPanel>
+            <usersControl:CustomersControl Grid.Row="1"/>
+        </Grid>
         
     </Grid>
 </Window>

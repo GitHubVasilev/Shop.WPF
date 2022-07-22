@@ -7,8 +7,8 @@
         xmlns:controls="clr-namespace:Shop.WPF.View.UserControls"
         mc:Ignorable="d"
         Title="AddCustomerWindow"
-        Height="280"
-        Width="250"
+        Height="310"
+        Width="300"
         DataContext="{Binding Source={StaticResource locator}, Path=AddCustomersVM}">
     <Grid>
         <StackPanel Margin="5">

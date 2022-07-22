@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Shop.WPF.View"
         mc:Ignorable="d"
         Title="AuthorizationMSSQLWindow"
-        Height="120"
-        Width="300"
+        Height="140"
+        Width="320"
         DataContext="{Binding Source={StaticResource locator}, Path=AuthorizationMSSQLDataVM}">
     <Grid>
         <StackPanel Orientation="Vertical" 

@@ -45,7 +45,7 @@ namespace Shop.WPF.ViewModel.Customers
                 {
                     _dialogsConteiner.ErrorDialog.ShowDialog(e.Message);
                 }
-            });
+            }, _ => !Customer.HasErrors);
         }
     }
 }

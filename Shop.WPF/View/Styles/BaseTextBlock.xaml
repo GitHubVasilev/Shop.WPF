@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style TargetType="TextBlock">
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontFamily" Value="Ink Free"/>
+        <Setter Property="FontFamily" Value="Times New Roman"/>
         <Setter Property="TextAlignment" Value="Center"/>
     </Style>
 </ResourceDictionary>

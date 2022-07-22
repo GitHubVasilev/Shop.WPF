@@ -27,26 +27,13 @@ namespace Shop.WPF.ViewModel.Customers
             _connectionService.ConnectionEvent += ConnectionOrDisconection;
         }
 
-        private void ConnectionOrDisconection(IAuthorizationService<AuthorizationOleDBDataDTO> sender, DataConnectionDBDTO eventArgs)
-        {
-            _isConnect = _isConnect == true ? false : true;
-            if(_isConnect)
-            {
-                Customers = new ObservableCollection<CustomerVM>();
-                foreach (CustomerDTO customer in _service.Get()) 
-                {
-                    Customers.Add(new CustomerVM(customer));
-                }
-            }
-        }
-
         private bool _isConnect;
 
         private ObservableCollection<CustomerVM>? _customers;
         public ObservableCollection<CustomerVM> Customers
         {
             get => _customers ?? new ObservableCollection<CustomerVM>();
-            set 
+            set
             {
                 _customers = value;
                 OnPropertyChanged();
@@ -72,6 +59,7 @@ namespace Shop.WPF.ViewModel.Customers
             get => _addCustomer ??= new RelayCommand(obj =>
             {
                 _dialogs.AddCustomerDialog.ShowDialog();
+                Update();
             }, _ => _isConnect);
         }
 
@@ -94,8 +82,29 @@ namespace Shop.WPF.ViewModel.Customers
                 IWarningDialog dialog = _dialogs.WarningDialog;
                 dialog.ShowDialog("Do you need to delete all customers?");
                 if (dialog.ResultDialog() ?? false) 
-                { _service.Crear(); }
+                { 
+                    _service.Crear();
+                    Update();
+                }
             }, _ => _isConnect);
+        }
+
+        private void ConnectionOrDisconection(IAuthorizationService<AuthorizationOleDBDataDTO> sender, DataConnectionDBDTO eventArgs)
+        {
+            _isConnect = _isConnect == true ? false : true;
+            Update();
+        }
+
+        private void Update()
+        {
+            if (_isConnect)
+            {
+                Customers = new ObservableCollection<CustomerVM>();
+                foreach (CustomerDTO customer in _service.Get())
+                {
+                    Customers.Add(new CustomerVM(customer));
+                }
+            }
         }
     }
 }
