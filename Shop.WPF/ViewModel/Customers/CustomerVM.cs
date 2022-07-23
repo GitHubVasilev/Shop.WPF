@@ -68,11 +68,5 @@ namespace Shop.WPF.ViewModel.Customers
             get => _phone;
             set => Set(ref _phone, value, nameof(Phone));
         }
-
-        public string? EmailErrors => GetErrorsString(nameof(Email));
-        public string? NameErrors => GetErrorsString(nameof(Name));
-        public string? LastnameErrors => GetErrorsString(nameof(Lastname));
-        public string? PatronymicErrors => GetErrorsString(nameof(Patronymic));
-        public string? PhoneErrors => GetErrorsString(nameof(Phone));
     }
 }

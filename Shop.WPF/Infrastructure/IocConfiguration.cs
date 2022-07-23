@@ -9,6 +9,7 @@ using Shop.WPF.ViewModel;
 using BusinessLogicLayer.DataTransferObject.Entitys;
 using Shop.WPF.Interfaces.Dialogs;
 using Shop.WPF.ViewModel.Customers;
+using Shop.WPF.ViewModel.Orders;
 
 namespace Shop.WPF.Infrastructure
 {
@@ -41,6 +42,8 @@ namespace Shop.WPF.Infrastructure
             services.AddTransient<AuthorizationOleDBDataVM>();
             services.AddTransient<AddCustomerVM>();
             services.AddScoped<CustomersVM>();
+            services.AddTransient<AddOrderVM>();
+            services.AddTransient<PropertyCustomerVM>();
 
             #endregion
 

@@ -13,5 +13,9 @@ namespace Shop.WPF.Dialogs
         public IWarningDialog WarningDialog => new WarningDialog();
 
         public IAddCustomerDialog AddCustomerDialog => new AddCustomerDialog();
+
+        public IAddOrderDialog AddOrderDialog => new AddOrderDialog();
+
+        public IPropertyCustomerDialog PropertyCustomerDialog => new PropertyCustomerDialog;
     }
 }

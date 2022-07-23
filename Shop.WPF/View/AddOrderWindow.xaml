@@ -1,0 +1,36 @@
+﻿<Window x:Class="Shop.WPF.View.AddOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Shop.WPF.View"
+        xmlns:localVM="clr-namespace:Shop.WPF.View.UserControls"
+        mc:Ignorable="d"
+        Title="AddOrderWindow"
+        Height="310"
+        Width="300"
+        DataContext="{Binding Source={StaticResource locator}, Path=AddOrderVM}">
+    <Grid>
+        <DockPanel Margin="5">
+            <localVM:OrderControl DataContext="{Binding Order}"
+                                  DockPanel.Dock="Top"/>
+            <Grid DockPanel.Dock="Bottom"
+                  VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding AddCommand}"
+                        IsDefault="True"
+                        Click="Button_Click"
+                        Content="Push"
+                        Margin="5"
+                        Grid.Column="0"/>
+                <Button IsCancel="True"
+                        Content="Close"
+                        Margin="5"
+                        Grid.Column="1"/>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

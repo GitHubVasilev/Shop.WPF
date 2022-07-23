@@ -25,8 +25,9 @@
                            HorizontalAlignment="Right"/>
                 <TextBox Text="{Binding Name, ValidatesOnNotifyDataErrors=True}"
                          Grid.Row="0"
-                         Grid.Column="1" />
-                <TextBlock Text="{Binding NameErrors}"
+                         Grid.Column="1"
+                         x:Name="Name_"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=Name_}, Path=(Validation.Errors)[0].ErrorContent}"
                            Style="{StaticResource ErrorText}"
                            Grid.Column="1"
                            Grid.Row="1"/>
@@ -46,8 +47,9 @@
                            HorizontalAlignment="Right"/>
                 <TextBox Text="{Binding Lastname, ValidatesOnNotifyDataErrors=True}"
                          Grid.Column="1"
-                         Grid.Row="0"/>
-                <TextBlock Text="{Binding LastnameErrors}"
+                         Grid.Row="0"
+                         x:Name="Lastname"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=Lastname}, Path=(Validation.Errors)[0].ErrorContent}"
                            Style="{StaticResource ErrorText}"
                            Grid.Column="1"
                            Grid.Row="1"/>
@@ -67,8 +69,9 @@
                            HorizontalAlignment="Right"/>
                 <TextBox Text="{Binding Patronymic, ValidatesOnNotifyDataErrors=True}"
                          Grid.Column="1"
-                         Grid.Row="0"/>
-                <TextBlock Text="{Binding PatronymicErrors}"
+                         Grid.Row="0"
+                         x:Name="Patronymic"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=Patronymic}, Path=(Validation.Errors)[0].ErrorContent}"
                            Style="{StaticResource ErrorText}"
                            Grid.Column="1"
                            Grid.Row="1"/>
@@ -88,8 +91,9 @@
                            HorizontalAlignment="Right"/>
                 <TextBox Text="{Binding Email, ValidatesOnNotifyDataErrors=True}"
                          Grid.Column="1"
-                         Grid.Row="0"/>
-                <TextBlock Text="{Binding EmailErrors}"
+                         Grid.Row="0"
+                         x:Name="Email"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=Email}, Path=(Validation.Errors)[0].ErrorContent}"
                            Style="{StaticResource ErrorText}"
                            Grid.Column="1"
                            Grid.Row="1"/>
@@ -109,8 +113,9 @@
                            HorizontalAlignment="Right"/>
                 <TextBox Text="{Binding Phone, ValidatesOnNotifyDataErrors=True}"
                          Grid.Column="1"
-                         Grid.Row="0"/>
-                <TextBlock Text="{Binding PhoneErrors}"
+                         Grid.Row="0"
+                         x:Name="Phone"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=Phone}, Path=(Validation.Errors)[0].ErrorContent}"
                            Style="{StaticResource ErrorText}"
                            Grid.Column="1"
                            Grid.Row="1"/>

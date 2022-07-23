@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Shop.WPF.Interfaces;
 using Shop.WPF.ViewModel;
 using Shop.WPF.ViewModel.Customers;
+using Shop.WPF.ViewModel.Orders;
 using System;
 
 namespace Shop.WPF.Infrastructure
@@ -35,5 +36,24 @@ namespace Shop.WPF.Infrastructure
 
         public CustomersVM CustomersVM =>
             _locator.GetRequiredService<CustomersVM>();
+
+        public AddOrderVM AddOrderVM 
+        {
+            get 
+            {
+                AddOrderVM vm = _locator.GetRequiredService<AddOrderVM>();
+                vm.Order.Email = CustomersVM.SelectedCustomer?.Email;
+                return vm;
+            }
+        }
+
+        public PropertyCustomerVM PropertyCustomerVM 
+        {
+            get 
+            {
+                PropertyCustomerVM vm = _locator.GetRequiredService<PropertyCustomerVM>();
+                return vm;
+            }
+        }
     }
 }

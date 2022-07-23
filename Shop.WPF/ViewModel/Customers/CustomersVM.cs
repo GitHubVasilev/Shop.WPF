@@ -4,6 +4,7 @@ using BusinessLogicLayer.Interfaces;
 using Shop.WPF.Infrastructure;
 using Shop.WPF.Interfaces.Dialogs;
 using Shop.WPF.ViewModel.Base;
+using System;
 using System.Collections.ObjectModel;
 
 namespace Shop.WPF.ViewModel.Customers
@@ -69,7 +70,7 @@ namespace Shop.WPF.ViewModel.Customers
         {
             get => _propertyCustomer ??= new RelayCommand(obj =>
             {
-
+                
             }, _ => _isConnect);
         }
 
@@ -82,10 +83,17 @@ namespace Shop.WPF.ViewModel.Customers
                 IWarningDialog dialog = _dialogs.WarningDialog;
                 dialog.ShowDialog("Do you need to delete all customers?");
                 if (dialog.ResultDialog() ?? false) 
-                { 
-                    _service.Crear();
-                    Update();
+                {
+                    try
+                    {
+                        _service.Crear();
+                    }
+                    catch (Exception e) 
+                    {
+                        _dialogs.ErrorDialog.ShowDialog(e.Message);
+                    }
                 }
+                Update();
             }, _ => _isConnect);
         }
 

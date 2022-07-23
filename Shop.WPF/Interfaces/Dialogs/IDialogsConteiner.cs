@@ -7,5 +7,7 @@
         IErrorDialog ErrorDialog { get; }
         IWarningDialog WarningDialog { get; }
         IAddCustomerDialog AddCustomerDialog { get; }
+        IAddOrderDialog AddOrderDialog { get; }
+        IPropertyCustomerDialog PropertyCustomerDialog { get; }
     }
 }
