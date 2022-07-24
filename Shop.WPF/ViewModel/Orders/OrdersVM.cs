@@ -3,19 +3,20 @@ using BusinessLogicLayer.DataTransferObject.Entitys;
 using BusinessLogicLayer.Interfaces;
 using Shop.WPF.Infrastructure;
 using Shop.WPF.Interfaces.Dialogs;
-using Shop.WPF.ViewModel.Orders;
+using Shop.WPF.ViewModel.Base;
+using Shop.WPF.ViewModel.Customers;
 using System;
 using System.Collections.ObjectModel;
 
-namespace Shop.WPF.ViewModel
+namespace Shop.WPF.ViewModel.Orders
 {
-    internal class PropertyCustomerVM
+    internal class OrdersVM : BaseViewModel
     {
         private readonly IService<OrderDTO> _service;
         private readonly IDialogsConteiner _dialogsConteiner;
         private readonly IAuthorizationService<AuthorizationOleDBDataDTO> _connectionService;
 
-        public PropertyCustomerVM(IService<OrderDTO> service,
+        public OrdersVM(IService<OrderDTO> service,
                                   IDialogsConteiner dialogConteiner,
                                   IAuthorizationService<AuthorizationOleDBDataDTO> connectionService)
         {
@@ -26,10 +27,23 @@ namespace Shop.WPF.ViewModel
 
             _connectionService.ConnectionEvent += ConnectionOrDisconection;
             _connectionService.DisconnectonEvent += ConnectionOrDisconection;
-            Update();
+            _isConnect = _connectionService.GetStatusConnect().IsConnected ?? false;
         }
 
         private bool _isConnect;
+
+        private CustomerVM? _selectedCustomer;
+
+        public CustomerVM? SelectedCustomer
+        {
+            get => _selectedCustomer;
+            set
+            {
+                _selectedCustomer = value;
+                OnPropertyChanged();
+                Update();
+            }
+        }
 
         public ObservableCollection<OrderVM> Orders { get; }
 
@@ -51,6 +65,7 @@ namespace Shop.WPF.ViewModel
                     try
                     {
                         _service.Crear();
+                        Update();
                     }
                     catch (Exception e)
                     {
@@ -61,11 +76,19 @@ namespace Shop.WPF.ViewModel
         }
 
         private RelayCommand? _addOrder;
-        public RelayCommand AddOrderCommand 
+        public RelayCommand AddOrderCommand
         {
             get => _addOrder ??= new RelayCommand(obj =>
             {
-                _dialogsConteiner.AddOrderDialog.ShowDialog();
+                try
+                {
+                    _dialogsConteiner.AddOrderDialog.ShowDialog();
+                    Update();
+                }
+                catch (Exception e)
+                {
+                    _dialogsConteiner.ErrorDialog?.ShowDialog(e.Message);
+                }
             }, _ => _isConnect);
         }
 
@@ -74,7 +97,8 @@ namespace Shop.WPF.ViewModel
             if (_isConnect)
             {
                 Orders.Clear();
-                foreach (OrderDTO order in _service.Get())
+                if (SelectedCustomer is null) return;
+                foreach (OrderDTO order in _service.Get(SelectedCustomer!.Email!))
                 {
                     Orders.Add(new OrderVM(order));
                 }

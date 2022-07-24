@@ -49,8 +49,7 @@
                 <TextBox Text="{Binding Article, ValidatesOnNotifyDataErrors=True}"
                          Grid.Row="0"
                          Grid.Column="1"
-                         x:Name="Article"
-                         IsReadOnly="True"/>
+                         x:Name="Article"/>
                 <TextBlock Text="{Binding Source={x:Reference Name=Article}, Path=(Validation.Errors)[0].ErrorContent}"
                            Style="{StaticResource ErrorText}"
                            Grid.Column="1"
@@ -72,8 +71,7 @@
                 <TextBox Text="{Binding NameProduct, ValidatesOnNotifyDataErrors=True}"
                          Grid.Row="0"
                          Grid.Column="1"
-                         x:Name="NameProduct"
-                         IsReadOnly="True"/>
+                         x:Name="NameProduct"/>
                 <TextBlock Text="{Binding Source={x:Reference Name=NameProduct}, Path=(Validation.Errors)[0].ErrorContent}"
                            Style="{StaticResource ErrorText}"
                            Grid.Column="1"

@@ -9,5 +9,6 @@
         IAddCustomerDialog AddCustomerDialog { get; }
         IAddOrderDialog AddOrderDialog { get; }
         IPropertyCustomerDialog PropertyCustomerDialog { get; }
+        IMessageDialog MessageDialog { get; }
     }
 }

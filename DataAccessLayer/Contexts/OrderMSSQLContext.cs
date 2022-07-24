@@ -49,7 +49,7 @@ namespace DataAccessLayer.Contexts
             {
                 result.Add(new Order() 
                 {
-                    UID = reader.GetGuid(0),
+                    UID = new Guid(reader.GetString(0)),
                     EmailCustomer = reader.GetString(1),
                     Atricle = reader.GetInt32(2),
                     NameProduct = reader.GetString(3),

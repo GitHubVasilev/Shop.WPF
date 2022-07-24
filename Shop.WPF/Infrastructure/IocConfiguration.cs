@@ -43,7 +43,8 @@ namespace Shop.WPF.Infrastructure
             services.AddTransient<AddCustomerVM>();
             services.AddScoped<CustomersVM>();
             services.AddTransient<AddOrderVM>();
-            services.AddTransient<PropertyCustomerVM>();
+            services.AddTransient<OrdersVM>();
+            services.AddTransient<UpdateCustomerVM>();
 
             #endregion
 

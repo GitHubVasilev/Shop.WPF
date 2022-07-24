@@ -47,11 +47,23 @@ namespace Shop.WPF.Infrastructure
             }
         }
 
-        public PropertyCustomerVM PropertyCustomerVM 
+        public OrdersVM Orders 
         {
             get 
             {
-                PropertyCustomerVM vm = _locator.GetRequiredService<PropertyCustomerVM>();
+                OrdersVM vm = _locator.GetRequiredService<OrdersVM>();
+                vm.SelectedCustomer = CustomersVM.SelectedCustomer;
+                return vm;
+            }
+        }
+            
+
+        public UpdateCustomerVM UpdateCustomerVM 
+        {
+            get 
+            {
+                UpdateCustomerVM vm = _locator.GetRequiredService<UpdateCustomerVM>();
+                vm.Customer = CustomersVM.SelectedCustomer ?? new CustomerVM();
                 return vm;
             }
         }

@@ -3,10 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Shop.WPF.View.UserControls"
+             xmlns:controls="clr-namespace:Shop.WPF.View.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="230" d:DesignWidth="200">
+             d:DesignHeight="250" d:DesignWidth="200"
+             DataContext="{Binding Source={StaticResource locator}, Path=UpdateCustomerVM}">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <controls:CustomerControl DataContext="{Binding Customer}"/>
+        <Button Grid.Row="1"
+                Command="{Binding UpdateCommand}"
+                Content="Update"
+                Margin="5"/>
     </Grid>
 </UserControl>

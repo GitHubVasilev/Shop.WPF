@@ -14,7 +14,7 @@ namespace BusinessLogicLayer.Services
         public OrderService(IUnitOfWork uof, IMapperFactory mapperFactory)
         {
             _repository = uof.Orders;
-            _mapper = mapperFactory.CustomerMapper;
+            _mapper = mapperFactory.OrderMapper;
         }
 
         public void Crear()
@@ -39,7 +39,8 @@ namespace BusinessLogicLayer.Services
 
         public List<OrderDTO> Get(string email)
         {
-            return new(_mapper.Map<List<OrderDTO>>(_repository.Get()));
+            IEnumerable<Order> r = _repository.Get();
+            return new(_mapper.Map<List<OrderDTO>>(r));
         }
 
         public void Update(OrderDTO entity)

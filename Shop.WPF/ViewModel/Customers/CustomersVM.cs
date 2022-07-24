@@ -70,7 +70,7 @@ namespace Shop.WPF.ViewModel.Customers
         {
             get => _propertyCustomer ??= new RelayCommand(obj =>
             {
-                
+                _dialogs.PropertyCustomerDialog.ShowDialog();
             }, _ => _isConnect);
         }
 

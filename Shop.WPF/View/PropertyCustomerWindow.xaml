@@ -4,11 +4,49 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shop.WPF.View"
+        xmlns:controls="clr-namespace:Shop.WPF.View.UserControls"
         mc:Ignorable="d"
         Title="PropertyCustomerWindow"
         Height="450"
-        Width="800">
+        Width="800"
+        >
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35*"/>
+            <ColumnDefinition Width="65*"/>
+        </Grid.ColumnDefinitions>
+        <controls:UpdateCustomerControl Grid.Column="0"/>
+        <Grid Grid.Column="1" 
+              DataContext="{Binding Source={StaticResource locator}, Path=Orders}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="85*"/>
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+            <DataGrid ItemsSource="{Binding Orders}"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Email" 
+                                            Binding="{Binding Email}"/>
+                    <DataGridTextColumn Header="Article" 
+                                            Binding="{Binding Article}"/>
+                    <DataGridTextColumn Header="Product Name" 
+                                            Binding="{Binding NameProduct}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="1" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Add Order"
+                        Command="{Binding AddOrderCommand}"
+                        Margin="0,0,5,0"
+                        Grid.Column="0"/>
+                <Button Content="Clear Orders"
+                        Command="{Binding ClearCommand}"
+                        Grid.Column="1"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

@@ -31,7 +31,8 @@
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
                           ColumnWidth="*"
-                          CanUserAddRows="False">
+                          CanUserAddRows="False"
+                          SelectedItem="{Binding SelectedCustomer}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" 
                                             Binding="{Binding Name}"/>

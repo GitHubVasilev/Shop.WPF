@@ -17,6 +17,7 @@ namespace Shop.WPF.ViewModel.Orders
         {
             _service = service;
             _dialogsConteiner = dialogConteiner;
+            Order = new OrderVM();
         }
 
 
