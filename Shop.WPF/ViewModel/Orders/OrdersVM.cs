@@ -92,13 +92,12 @@ namespace Shop.WPF.ViewModel.Orders
             }, _ => _isConnect);
         }
 
-        private void Update()
+        private async void Update()
         {
             if (_isConnect)
             {
                 Orders.Clear();
-                if (SelectedCustomer is null) return;
-                foreach (OrderDTO order in _service.Get(SelectedCustomer!.Email!))
+                foreach (OrderDTO order in await _service.Get(SelectedCustomer!.Email!))
                 {
                     Orders.Add(new OrderVM(order));
                 }

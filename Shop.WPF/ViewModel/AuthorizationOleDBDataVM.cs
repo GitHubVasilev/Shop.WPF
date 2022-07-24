@@ -1,6 +1,7 @@
 ﻿using BusinessLogicLayer.DataTransferObject;
 using BusinessLogicLayer.Interfaces;
 using Shop.WPF.Infrastructure;
+using Shop.WPF.Interfaces.Dialogs;
 using Shop.WPF.ViewModel.Base;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,10 +10,12 @@ namespace Shop.WPF.ViewModel
     internal class AuthorizationOleDBDataVM : ValidationBaseViewModel
     {
         private readonly IAuthorizationService<AuthorizationOleDBDataDTO> _serviceConnectDB;
+        private readonly IDialogsConteiner _dialogConteiner;
 
-        public AuthorizationOleDBDataVM(IAuthorizationService<AuthorizationOleDBDataDTO> serviceConnectDB)
+        public AuthorizationOleDBDataVM(IAuthorizationService<AuthorizationOleDBDataDTO> serviceConnectDB, IDialogsConteiner dialogConteiner)
         {
             _serviceConnectDB = serviceConnectDB;
+            _dialogConteiner = dialogConteiner;
         }
 
         private string? _dataSourceName;
@@ -46,14 +49,22 @@ namespace Shop.WPF.ViewModel
 
         public RelayCommand ConnectCommand
         {
-            get => _connectCommand ??= new RelayCommand(obj =>
+            get => _connectCommand ??= new RelayCommand(async obj =>
             {
-                _serviceConnectDB.Connect(new AuthorizationOleDBDataDTO()
+                try
                 {
-                    DataSourceName = DataSourceName,
-                    Login = Login,
-                    Password = Password
-                });
+                    await _serviceConnectDB.Connect(new AuthorizationOleDBDataDTO()
+                    {
+                        DataSourceName = DataSourceName,
+                        Login = Login,
+                        Password = Password
+                    });
+                }
+                catch (System.Exception e)
+                {
+                    _dialogConteiner.ErrorDialog.ShowDialog(e.Message);
+                }
+                       
             }, _ => !this.HasErrors);
         }
     }

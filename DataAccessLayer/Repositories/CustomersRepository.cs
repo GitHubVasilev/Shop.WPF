@@ -3,6 +3,7 @@ using DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
@@ -15,36 +16,36 @@ namespace DataAccessLayer.Repositories
             _dbContext = oleDBContext;
         }
 
-        public void Clear()
+        public async Task Clear()
         {
-            _dbContext.RunCommand("DELETE FROM Customers");
+            await _dbContext.RunCommand("DELETE FROM Customers");
         }
 
-        public void Delete(Customer entity)
+        public Task Delete(Customer entity)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Customer> Get()
+        public async Task<IEnumerable<Customer>> Get()
         {
-            return _dbContext.GetTable();
+            return await _dbContext.GetTable();
         }
 
-        public IEnumerable<Customer> Get(Func<Customer, bool> predicate)
+        public async Task<IEnumerable<Customer>> Get(Func<Customer, bool> predicate)
         {
-            return _dbContext.GetTable().Where(predicate);
+            return (await _dbContext.GetTable()).Where(predicate);
         }
 
-        public void Insert(Customer entity)
+        public async Task Insert(Customer entity)
         {
-            _dbContext.RunCommand(
+            await _dbContext.RunCommand(
             "INSERT INTO Customers (Name, LastName, Patronymic, Phone, Email, UID)" +
             $"VALUES('{entity.Name}', '{entity.LastName}', '{entity.Patronymic}', '{entity.Phone}', '{entity.Email}', '{entity.UID}')");
         }
 
-        public void Update(Customer entity)
+        public async Task Update(Customer entity)
         {
-            _dbContext.RunCommand
+            await _dbContext.RunCommand
                 (
                 "UPDATE Customers" +
                 " SET   " +

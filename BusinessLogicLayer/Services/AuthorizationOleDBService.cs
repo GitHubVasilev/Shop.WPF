@@ -16,18 +16,18 @@ namespace BusinessLogicLayer.Services
             _unitOfWork = unitOfWork;
         }
 
-        public void Connect(AuthorizationOleDBDataDTO dataAuthorization)
+        public async Task Connect(AuthorizationOleDBDataDTO dataAuthorization)
         {
-            _unitOfWork.CustomrsConnect.Connect(
+            await _unitOfWork.CustomrsConnect.Connect(
                 dataAuthorization.DataSourceName ?? "",
                 dataAuthorization.Login ?? "",
                 dataAuthorization.Password ?? "");
             ConnectionEvent?.Invoke(this, GetStatusConnect());
         }
 
-        public void Disconect()
+        public async Task Disconect()
         {
-            _unitOfWork.CustomrsConnect.Disconnect();
+            await _unitOfWork.CustomrsConnect.Disconnect();
             DisconnectonEvent?.Invoke(this, GetStatusConnect());
         }
 

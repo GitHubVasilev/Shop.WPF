@@ -5,11 +5,11 @@ namespace BusinessLogicLayer.Interfaces
     public interface IService<T>
         where T : BaseEntityDTO
     {
-        List<T> Get();
-        List<T> Get(string email);
-        void Create(T entity);
-        void Update(T entity);
-        void Delete(T entity);
-        void Crear();
+        Task<List<T>> Get();
+        Task<List<T>> Get(string email);
+        Task Create(T entity);
+        Task Update(T entity);
+        Task Delete(T entity);
+        Task Crear();
     }
 }

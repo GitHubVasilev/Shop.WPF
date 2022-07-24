@@ -103,12 +103,12 @@ namespace Shop.WPF.ViewModel.Customers
             Update();
         }
 
-        private void Update()
+        private async void Update()
         {
             if (_isConnect)
             {
                 Customers = new ObservableCollection<CustomerVM>();
-                foreach (CustomerDTO customer in _service.Get())
+                foreach (CustomerDTO customer in await _service.Get())
                 {
                     Customers.Add(new CustomerVM(customer));
                 }

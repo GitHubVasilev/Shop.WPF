@@ -17,35 +17,34 @@ namespace BusinessLogicLayer.Services
             _mapper = mapperFactory.OrderMapper;
         }
 
-        public void Crear()
+        public async Task Crear()
         {
-            _repository.Clear();
+            await _repository.Clear();
         }
 
-        public void Create(OrderDTO entity)
+        public async Task Create(OrderDTO entity)
         {
-            _repository.Insert(_mapper.Map<Order>(entity));
+            await _repository.Insert(_mapper.Map<Order>(entity));
         }
 
-        public void Delete(OrderDTO entity)
+        public async Task Delete(OrderDTO entity)
         {
-            _repository.Delete(_mapper.Map<Order>(entity));
+            await _repository.Delete(_mapper.Map<Order>(entity));
         }
 
-        public List<OrderDTO> Get()
+        public async Task<List<OrderDTO>> Get()
         {
-            return new(_mapper.Map<List<OrderDTO>>(_repository.Get()));
+            return new(_mapper.Map<List<OrderDTO>>(await _repository.Get()));
         }
 
-        public List<OrderDTO> Get(string email)
+        public async Task<List<OrderDTO>> Get(string email)
         {
-            IEnumerable<Order> r = _repository.Get();
-            return new(_mapper.Map<List<OrderDTO>>(r));
+            return new(_mapper.Map<List<OrderDTO>>(await _repository.Get()));
         }
 
-        public void Update(OrderDTO entity)
+        public async Task Update(OrderDTO entity)
         {
-            _repository.Update(_mapper.Map<Order>(entity));
+            await _repository.Update(_mapper.Map<Order>(entity));
         }
     }
 }

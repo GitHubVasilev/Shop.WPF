@@ -19,35 +19,35 @@ namespace BusinessLogicLayer.Services
             _repositoryOrder = uof.Orders;
         }
 
-        public void Crear()
+        public async Task Crear()
         {
-            _repositoryOrder.Clear();
-            _repository.Clear();  
+            await _repositoryOrder.Clear();
+            await _repository.Clear();  
         }
 
-        public void Create(CustomerDTO entity)
+        public async Task Create(CustomerDTO entity)
         {
-            _repository.Insert(_mapper.Map<Customer>(entity));
+            await _repository.Insert(_mapper.Map<Customer>(entity));
         }
 
-        public void Delete(CustomerDTO entity)
+        public async Task Delete(CustomerDTO entity)
         {
-            _repository.Delete(_mapper.Map<Customer>(entity));
+            await _repository.Delete(_mapper.Map<Customer>(entity));
         }
 
-        public List<CustomerDTO> Get()
+        public async Task<List<CustomerDTO>> Get()
         {
-            return new List<CustomerDTO>(_mapper.Map<List<CustomerDTO>>(_repository.Get()));
+            return new List<CustomerDTO>(_mapper.Map<List<CustomerDTO>>(await _repository.Get()));
         }
 
-        public List<CustomerDTO> Get(string email)
+        public async Task<List<CustomerDTO>> Get(string email)
         {
-            return new List<CustomerDTO>(_mapper.Map<List<CustomerDTO>>(_repository.Get(m=>m.Email == email)));
+            return new List<CustomerDTO>(_mapper.Map<List<CustomerDTO>>(await _repository.Get(m=>m.Email == email)));
         }
 
-        public void Update(CustomerDTO entity)
+        public async Task Update(CustomerDTO entity)
         {
-            _repository.Update(_mapper.Map<Customer>(entity));
+            await _repository.Update(_mapper.Map<Customer>(entity));
         }
     }
 }

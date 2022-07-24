@@ -57,7 +57,6 @@ namespace Shop.WPF.Infrastructure
             }
         }
             
-
         public UpdateCustomerVM UpdateCustomerVM 
         {
             get 

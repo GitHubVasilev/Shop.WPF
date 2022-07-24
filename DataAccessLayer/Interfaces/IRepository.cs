@@ -1,17 +1,18 @@
 ﻿using DataAccessLayer.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
     public interface IRepository<T>
         where T : BaseEntity
     {
-        IEnumerable<T> Get();
-        IEnumerable<T> Get(Func<T,bool> predicate);
-        void Insert(T entity);
-        void Update(T entity);
-        void Delete(T entity);
-        void Clear();
+        Task<IEnumerable<T>> Get();
+        Task<IEnumerable<T>> Get(Func<T,bool> predicate);
+        Task Insert(T entity);
+        Task Update(T entity);
+        Task Delete(T entity);
+        Task Clear();
     }
 }

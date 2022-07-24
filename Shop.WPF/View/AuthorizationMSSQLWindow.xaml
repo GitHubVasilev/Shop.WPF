@@ -21,8 +21,7 @@
                 <TextBlock Text="String Conntection: "
                            Grid.Column="0"/>
                 <TextBox Grid.Column="1"
-                         Text="{Binding DataSourceName, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                         TextWrapping="Wrap"/>
+                         Text="{Binding DataSourceName, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>

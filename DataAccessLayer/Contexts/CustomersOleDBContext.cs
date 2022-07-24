@@ -2,7 +2,9 @@
 using DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.OleDb;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer.Contexts
 {
@@ -19,31 +21,52 @@ namespace DataAccessLayer.Contexts
 
         public bool IsEnabled => _connection.State > 0;
 
-        public void Connect(string initalCatalog, string login, string password) 
+        public async Task Connect(string initalCatalog, string login, string password) 
         {
             //OleDbConnectionStringBuilder connectionString = new OleDbConnectionStringBuilder()
             //{
             //    Provider = @"Microsoft.ACE.OLEDB.12.0",
             //    DataSource = $"{initalCatalog}",
             //};
+            await Task.Delay(5000);
+
             _connection.ConnectionString = initalCatalog;
 
-            _connection.Open();
+            await _connection.OpenAsync();
+
+            OleDbCommand command = new OleDbCommand($"SELECT * FROM Auth WHERE Login='{login}' AND [Password]='{password}'", _connection);
+            DbDataReader reader = await command.ExecuteReaderAsync();
+
+            bool isFind= false;
+
+            while (await reader.ReadAsync()) 
+            {
+                isFind = true;
+                break;
+            }
+
+            if (!isFind) 
+            {
+                await command.DisposeAsync();
+                throw new AccessViolationException("Invalid login or password");
+            }
+
+            
         }
 
-        public void Disconnect() 
+        public async Task Disconnect() 
         {
-            _connection.Close();
+            await _connection.CloseAsync();
         }
 
-        public IEnumerable<Customer> GetTable()
+        public async Task<IEnumerable<Customer>> GetTable()
         {
             OleDbCommand command = new OleDbCommand("SELECT * FROM Customers", _connection);
             OleDbDataReader reader = command.ExecuteReader();
 
             List<Customer> result = new List<Customer>();
 
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 result.Add(new Customer()
                 {
@@ -58,15 +81,15 @@ namespace DataAccessLayer.Contexts
             return result;
         }
 
-        public void RunCommand(string command)
+        public async Task RunCommand(string command)
         {
             OleDbCommand cmd = new OleDbCommand(command, _connection);
-            cmd.ExecuteNonQuery();
+            await cmd.ExecuteNonQueryAsync();
         }
 
         public void Dispose()
         {
-            _connection.Close();
+            Disconnect();
         }
     }
 }

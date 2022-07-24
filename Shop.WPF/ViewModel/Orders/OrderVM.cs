@@ -30,36 +30,24 @@ namespace Shop.WPF.ViewModel.Orders
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         public string? Email 
         {
-            get { return _email; }
-            set
-            {
-                _email = value;
-                OnPropertyChanged();
-            }
+            get => _email;
+            set => Set(ref _email, Email, nameof(Email));
         }
 
         private string? _nameProduct;
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         public string? NameProduct 
         {
-            get { return _nameProduct; }
-            set 
-            {
-                _nameProduct = value;
-                OnPropertyChanged();
-            }
+            get => _nameProduct;
+            set => Set(ref _nameProduct, value, nameof(NameProduct));
         }
 
         private int _article;
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         public int Article 
         {
-            get { return _article; }
-            set 
-            { 
-                _article = value;
-                OnPropertyChanged();
-            }
+            get => _article;
+            set => Set(ref _article, Article, nameof(Article));
         }
     }
 }

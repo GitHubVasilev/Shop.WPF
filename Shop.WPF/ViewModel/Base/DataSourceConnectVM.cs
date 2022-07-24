@@ -55,11 +55,11 @@ namespace Shop.WPF.ViewModel.Base
 
         public RelayCommand? DisconnectCommand
         {
-            get => _disconnectCommand ??= new RelayCommand(obj =>
+            get => _disconnectCommand ??= new RelayCommand(async obj =>
             {
                 try
                 {
-                    _authorizationService.Disconect();
+                    await _authorizationService.Disconect();
                 }
                 catch (Exception e)
                 {

@@ -8,8 +8,8 @@ namespace BusinessLogicLayer.Interfaces
         delegate void Disconnection(IAuthorizationService<T> sender, DataConnectionDBDTO eventArgs);
         public event Connection? ConnectionEvent;
         public event Disconnection? DisconnectonEvent;
-        void Connect(T dataAuthorization);
-        void Disconect();
+        Task Connect(T dataAuthorization);
+        Task Disconect();
         DataConnectionDBDTO GetStatusConnect();
     }
 }

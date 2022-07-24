@@ -3,6 +3,7 @@ using DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
@@ -15,29 +16,29 @@ namespace DataAccessLayer.Repositories
             _dbContext = dbContext;
         }
 
-        public void Clear()
+        public async Task Clear()
         {
-            _dbContext.RunCommand("EXEC deleteOrders");
+            await _dbContext.RunCommand("EXEC deleteOrders");
         }
 
-        public void Delete(Order entity)
+        public Task Delete(Order entity)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Order> Get()
+        public async Task<IEnumerable<Order>> Get()
         {
-            return _dbContext.GetTable();
+            return await _dbContext.GetTable();
         }
 
-        public IEnumerable<Order> Get(Func<Order, bool> predicate)
+        public async Task<IEnumerable<Order>> Get(Func<Order, bool> predicate)
         {
-            return _dbContext.GetTable().Where(predicate);
+            return (await _dbContext.GetTable()).Where(predicate);
         }
 
-        public void Insert(Order entity)
+        public async Task Insert(Order entity)
         {
-            _dbContext.RunCommand(
+            await _dbContext.RunCommand(
                 "EXEC createOrder " +
                 $"@UID='{entity.UID}', " +
                 $"@email='{entity.EmailCustomer}', " +
@@ -46,7 +47,7 @@ namespace DataAccessLayer.Repositories
             );
         }
 
-        public void Update(Order entity)
+        public Task Update(Order entity)
         {
             throw new NotImplementedException();
         }

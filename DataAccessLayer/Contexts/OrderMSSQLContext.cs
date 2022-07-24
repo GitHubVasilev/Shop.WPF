@@ -3,6 +3,7 @@ using DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer.Contexts
 {
@@ -19,7 +20,7 @@ namespace DataAccessLayer.Contexts
 
         public string DatabaseName => _connection.Database;
 
-        public void Connect(string initialCatalog)
+        public async Task Connect(string initialCatalog)
         {
             //SqlConnectionStringBuilder connectionString = new SqlConnectionStringBuilder()
             //{
@@ -30,22 +31,22 @@ namespace DataAccessLayer.Contexts
             //};
 
             _connection.ConnectionString = initialCatalog;
-            _connection.Open();
+            await _connection.OpenAsync();
         }
 
-        public void Disconnect()
+        public async Task Disconnect()
         {
-            _connection.Close();
+            await _connection.CloseAsync();
         } 
 
-        public IEnumerable<Order> GetTable()
+        public async Task<IEnumerable<Order>> GetTable()
         {
             SqlCommand command = new("SELECT * FROM Orders", _connection);
             SqlDataReader reader = command.ExecuteReader();
 
             List<Order> result = new();
 
-            while (reader.Read()) 
+            while (await reader.ReadAsync()) 
             {
                 result.Add(new Order() 
                 {
@@ -60,11 +61,11 @@ namespace DataAccessLayer.Contexts
 
         }
 
-        public void RunCommand(string command)
+        public async Task RunCommand(string command)
         {
             SqlCommand cmd = new(command, _connection);
 
-            cmd.ExecuteNonQuery();
+            await cmd.ExecuteNonQueryAsync();
         }
 
         public void Dispose()

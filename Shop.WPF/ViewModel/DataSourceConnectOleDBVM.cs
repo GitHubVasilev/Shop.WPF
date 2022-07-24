@@ -16,8 +16,14 @@ namespace Shop.WPF.ViewModel
         public override RelayCommand? ConnectCommand
         {
             get => _connectCommand ??= new RelayCommand(obj =>
-            {
-                _dialogsConteiner.AuthorizationOleDBDialog.ShowDialog();
+            {            
+                IAuthorizationOleDBDialog dialog = _dialogsConteiner.AuthorizationOleDBDialog;
+                DataSourceName = "Loading...";
+                dialog.ShowDialog();
+                if (dialog.ResultDialog()) 
+                {
+                    DataSourceName = "";
+                }
             }, _ => IsConnect == 0);
         }
     }

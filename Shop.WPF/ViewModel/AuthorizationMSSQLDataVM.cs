@@ -1,7 +1,9 @@
 ﻿using BusinessLogicLayer.DataTransferObject;
 using BusinessLogicLayer.Interfaces;
 using Shop.WPF.Infrastructure;
+using Shop.WPF.Interfaces.Dialogs;
 using Shop.WPF.ViewModel.Base;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Shop.WPF.ViewModel
@@ -9,10 +11,12 @@ namespace Shop.WPF.ViewModel
     internal class AuthorizationMSSQLDataVM : ValidationBaseViewModel
     {
         private readonly IAuthorizationService<AuthorizationMSSQLDataDTO> _serviceConnectDB;
+        private readonly IDialogsConteiner _dialogConteiner;
 
-        public AuthorizationMSSQLDataVM(IAuthorizationService<AuthorizationMSSQLDataDTO> serviceConnectDB)
+        public AuthorizationMSSQLDataVM(IAuthorizationService<AuthorizationMSSQLDataDTO> serviceConnectDB, IDialogsConteiner dialogConteiner)
         {
             _serviceConnectDB = serviceConnectDB;
+            _dialogConteiner = dialogConteiner;
         }
 
         private string? _dataSourceName;
@@ -28,9 +32,16 @@ namespace Shop.WPF.ViewModel
 
         public RelayCommand ConnectCommand 
         {
-            get => _connectCommand ??= new RelayCommand(obj =>
+            get => _connectCommand ??= new RelayCommand(async obj =>
             {
-                _serviceConnectDB.Connect(new AuthorizationMSSQLDataDTO() { DataSourceName = DataSourceName });
+                try
+                {
+                    await _serviceConnectDB.Connect(new AuthorizationMSSQLDataDTO() { DataSourceName = DataSourceName });
+                }
+                catch (Exception e) 
+                {
+                    _dialogConteiner.ErrorDialog.ShowDialog(e.Message);
+                }
             }, _ => !this.HasErrors);
         }
     }
