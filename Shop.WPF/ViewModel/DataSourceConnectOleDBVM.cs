@@ -18,12 +18,10 @@ namespace Shop.WPF.ViewModel
             get => _connectCommand ??= new RelayCommand(obj =>
             {            
                 IAuthorizationOleDBDialog dialog = _dialogsConteiner.AuthorizationOleDBDialog;
-                DataSourceName = "Loading...";
+
                 dialog.ShowDialog();
-                if (dialog.ResultDialog()) 
-                {
-                    DataSourceName = "";
-                }
+                DataSourceName = "Loading...";
+
             }, _ => IsConnect == 0);
         }
     }

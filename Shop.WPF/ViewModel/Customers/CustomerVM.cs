@@ -10,11 +10,11 @@ namespace Shop.WPF.ViewModel.Customers
         public CustomerVM(CustomerDTO? customer = null)
         {
             customer ??= new CustomerDTO();
-            Name = customer!.Name;
-            Lastname = customer!.LastName;
-            Patronymic = customer!.Patronymic;
-            Phone = customer!.Phone;
-            Email = customer!.Email;
+            Name = customer!.Name ?? "";
+            Lastname = customer!.LastName ?? "";
+            Patronymic = customer!.Patronymic ?? "";
+            Phone = customer!.Phone ?? "";
+            Email = customer!.Email ?? "";
             _UID = customer!.UID;
         }
 

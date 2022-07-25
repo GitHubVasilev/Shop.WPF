@@ -35,11 +35,12 @@ namespace Shop.WPF.ViewModel.Orders
         private RelayCommand? _addCommand;
         public RelayCommand AddCommand 
         {
-            get => _addCommand ??= new RelayCommand(obj =>
+            get => _addCommand ??= new RelayCommand(async obj =>
             {
                 try
                 {
-                    _service.Create(Order.BaseModel);
+                    await _service.Create(Order.BaseModel);
+                    _dialogsConteiner.MessageDialog.ShowDialog("Create Order Success");
                 }
                 catch (Exception e) 
                 {

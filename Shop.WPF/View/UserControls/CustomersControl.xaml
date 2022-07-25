@@ -32,7 +32,8 @@
                           IsReadOnly="True"
                           ColumnWidth="*"
                           CanUserAddRows="False"
-                          SelectedItem="{Binding SelectedCustomer}">
+                          SelectedItem="{Binding SelectedCustomer}"
+                          SelectionMode="Single">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" 
                                             Binding="{Binding Name}"/>

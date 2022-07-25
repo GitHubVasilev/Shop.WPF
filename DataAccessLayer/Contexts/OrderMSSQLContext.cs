@@ -29,7 +29,10 @@ namespace DataAccessLayer.Contexts
             //    IntegratedSecurity = false,
             //    Pooling = true
             //};
-
+            if (!initialCatalog.Contains("MultipleActiveResultSets=True")) 
+            {
+                initialCatalog += ";MultipleActiveResultSets=True";
+            }
             _connection.ConnectionString = initialCatalog;
             await _connection.OpenAsync();
         }

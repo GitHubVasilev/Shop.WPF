@@ -39,7 +39,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<List<OrderDTO>> Get(string email)
         {
-            return new(_mapper.Map<List<OrderDTO>>(await _repository.Get()));
+            return _mapper.Map<List<OrderDTO>>(await _repository.Get(m => email == m.EmailCustomer));
         }
 
         public async Task Update(OrderDTO entity)

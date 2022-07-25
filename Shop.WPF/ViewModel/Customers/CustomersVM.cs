@@ -107,11 +107,19 @@ namespace Shop.WPF.ViewModel.Customers
         {
             if (_isConnect)
             {
-                Customers = new ObservableCollection<CustomerVM>();
-                foreach (CustomerDTO customer in await _service.Get())
+                try
                 {
-                    Customers.Add(new CustomerVM(customer));
+                    Customers = new ObservableCollection<CustomerVM>();
+                    foreach (CustomerDTO customer in await _service.Get())
+                    {
+                        Customers.Add(new CustomerVM(customer));
+                    }
                 }
+                catch (Exception e) 
+                {
+                    _dialogs?.ErrorDialog.ShowDialog(e.Message);
+                }
+                
             }
         }
     }

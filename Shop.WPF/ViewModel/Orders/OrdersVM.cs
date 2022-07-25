@@ -56,7 +56,7 @@ namespace Shop.WPF.ViewModel.Orders
         private RelayCommand? _clear;
         public RelayCommand ClearCommand
         {
-            get => _clear ??= new RelayCommand(obj =>
+            get => _clear ??= new RelayCommand(async obj =>
             {
                 IWarningDialog dialog = _dialogsConteiner.WarningDialog;
                 dialog.ShowDialog("Do you need to delete all customers?");
@@ -64,7 +64,7 @@ namespace Shop.WPF.ViewModel.Orders
                 {
                     try
                     {
-                        _service.Crear();
+                         await _service.Crear();
                         Update();
                     }
                     catch (Exception e)
@@ -94,13 +94,22 @@ namespace Shop.WPF.ViewModel.Orders
 
         private async void Update()
         {
+            if (SelectedCustomer is null) return;
             if (_isConnect)
             {
-                Orders.Clear();
-                foreach (OrderDTO order in await _service.Get(SelectedCustomer!.Email!))
+                try
                 {
-                    Orders.Add(new OrderVM(order));
+                    Orders.Clear();
+                    foreach (OrderDTO order in await _service.Get(SelectedCustomer!.Email!))
+                    {
+                        Orders.Add(new OrderVM(order));
+                    }
                 }
+                catch(Exception e) 
+                {
+                    _dialogsConteiner.ErrorDialog.ShowDialog(e.Message);
+                }
+                
             }
         }
     }

@@ -18,12 +18,10 @@ namespace Shop.WPF.ViewModel
             get => _connectCommand ??= new RelayCommand(obj =>
             {                
                 IAuthorizationMSSQLDialog dialog = _dialogsConteiner.AuthorizationMSSQLDialog;
-                DataSourceName = "Loading...";
+                
                 dialog.ShowDialog();
-                if (dialog.ResultDialog())
-                {
-                    DataSourceName = "";
-                }
+                DataSourceName = "Loading...";
+
             }, _ => IsConnect == 0);
         }
     }

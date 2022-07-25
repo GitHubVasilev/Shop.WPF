@@ -35,11 +35,12 @@ namespace Shop.WPF.ViewModel.Customers
 
         public RelayCommand AddCommand
         {
-            get => _addCommand ??= new RelayCommand(obj => 
+            get => _addCommand ??= new RelayCommand(async obj => 
             {
                 try
                 {
-                    _service.Create(Customer.BaseModel);
+                    await _service.Create(Customer.BaseModel);
+                    _dialogsConteiner.MessageDialog.ShowDialog("Create Customer Success");
                 }
                 catch (Exception e) 
                 {

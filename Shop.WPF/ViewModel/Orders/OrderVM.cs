@@ -11,9 +11,9 @@ namespace Shop.WPF.ViewModel.Orders
         {
             OrderDTO orderDTO = order ?? new OrderDTO();
             _UID = orderDTO.UID == default ? Guid.NewGuid() : orderDTO.UID;
-            Email = orderDTO.Email;
+            Email = orderDTO.Email ?? "";
             Article = orderDTO.Atricle;
-            NameProduct = orderDTO.NameProduct;
+            NameProduct = orderDTO.NameProduct ?? "";
         }
 
         public OrderDTO BaseModel => new OrderDTO()
@@ -31,7 +31,7 @@ namespace Shop.WPF.ViewModel.Orders
         public string? Email 
         {
             get => _email;
-            set => Set(ref _email, Email, nameof(Email));
+            set => Set(ref _email, value, nameof(Email));
         }
 
         private string? _nameProduct;
@@ -47,7 +47,7 @@ namespace Shop.WPF.ViewModel.Orders
         public int Article 
         {
             get => _article;
-            set => Set(ref _article, Article, nameof(Article));
+            set => Set(ref _article, value, nameof(Article));
         }
     }
 }

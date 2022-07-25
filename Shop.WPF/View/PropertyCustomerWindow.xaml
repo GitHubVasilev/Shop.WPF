@@ -24,7 +24,8 @@
             </Grid.RowDefinitions>
             <DataGrid ItemsSource="{Binding Orders}"
                       IsReadOnly="True"
-                      AutoGenerateColumns="False">
+                      AutoGenerateColumns="False"
+                      SelectionMode="Single">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Email" 
                                             Binding="{Binding Email}"/>
