@@ -47,16 +47,17 @@ namespace DataAccessLayer.Contexts
 
             if (!isFind) 
             {
-                await command.DisposeAsync();
+                _connection.Close();
                 throw new AccessViolationException("Invalid login or password");
-            }
-
-            
+            }   
         }
 
         public async Task Disconnect() 
         {
-            await _connection.CloseAsync();
+            if (_connection.State != 0) 
+            {
+                await _connection.CloseAsync();
+            }
         }
 
         public async Task<IEnumerable<Customer>> GetTable()

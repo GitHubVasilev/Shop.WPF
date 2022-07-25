@@ -39,7 +39,10 @@ namespace DataAccessLayer.Contexts
 
         public async Task Disconnect()
         {
-            await _connection.CloseAsync();
+            if (!(_connection.State == 0)) 
+            {
+                await _connection.CloseAsync();
+            }    
         } 
 
         public async Task<IEnumerable<Order>> GetTable()

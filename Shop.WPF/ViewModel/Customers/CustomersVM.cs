@@ -99,7 +99,7 @@ namespace Shop.WPF.ViewModel.Customers
 
         private void ConnectionOrDisconection(IAuthorizationService<AuthorizationOleDBDataDTO> sender, DataConnectionDBDTO eventArgs)
         {
-            _isConnect = _isConnect == true ? false : true;
+            _isConnect = _connectionService.GetStatusConnect().IsConnected ?? false;
             Update();
         }
 

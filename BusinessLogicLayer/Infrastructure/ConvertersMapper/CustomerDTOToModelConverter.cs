@@ -4,6 +4,9 @@ using DataAccessLayer.Entities;
 
 namespace BusinessLogicLayer.Infrastructure.ConvertersMapper
 {
+    /// <summary>
+    /// Automapper 
+    /// </summary>
     internal class CustomerDTOToModelConverter : ITypeConverter<CustomerDTO, Customer>
     {
         public Customer Convert(CustomerDTO source, Customer destination, ResolutionContext context)
