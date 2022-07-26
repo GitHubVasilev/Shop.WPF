@@ -25,6 +25,8 @@ namespace Shop.WPF.ViewModel.Customers
             _service = service;
             _connectionService = authorizationService;
             Customers = new();
+
+            _service.NotifyUpdateData += Update;
             _connectionService.DisconnectonEvent += ConnectionOrDisconection;
             _connectionService.ConnectionEvent += ConnectionOrDisconection;
         }
@@ -62,10 +64,6 @@ namespace Shop.WPF.ViewModel.Customers
             {
                 IAddCustomerDialog dialog = _dialogs.AddCustomerDialog;
                 dialog.ShowDialog();
-                if (dialog.ResultDialog()) 
-                {
-                    Update();
-                }
             }, _ => _isConnect);
         }
 
@@ -98,17 +96,16 @@ namespace Shop.WPF.ViewModel.Customers
                         _dialogs.ErrorDialog.ShowDialog(e.Message);
                     }
                 }
-                Update();
             }, _ => _isConnect);
         }
 
         private void ConnectionOrDisconection(IAuthorizationService<AuthorizationOleDBDataDTO> sender, DataConnectionDBDTO eventArgs)
         {
             _isConnect = _connectionService.GetStatusConnect().IsConnected ?? false;
-            Update();
+            Update(_service, null);
         }
 
-        private async void Update()
+        private async void Update(IService<CustomerDTO> sender, object? eventArgs)
         {
             Debug.WriteLine("Update");
             if (_isConnect)

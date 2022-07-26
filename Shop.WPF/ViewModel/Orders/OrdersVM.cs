@@ -27,6 +27,8 @@ namespace Shop.WPF.ViewModel.Orders
 
             _connectionService.ConnectionEvent += ConnectionOrDisconection;
             _connectionService.DisconnectonEvent += ConnectionOrDisconection;
+            _service.NotifyUpdateData += Update;
+
             _isConnect = _connectionService.GetStatusConnect().IsConnected ?? false;
         }
 
@@ -39,9 +41,9 @@ namespace Shop.WPF.ViewModel.Orders
             get => _selectedCustomer;
             set
             {
-                _selectedCustomer = value;
+                _selectedCustomer = new CustomerVM(value?.BaseModel);
+                Update(_service, null);
                 OnPropertyChanged();
-                Update();
             }
         }
 
@@ -50,7 +52,6 @@ namespace Shop.WPF.ViewModel.Orders
         private void ConnectionOrDisconection(IAuthorizationService<AuthorizationOleDBDataDTO> sender, DataConnectionDBDTO eventArgs)
         {
             _isConnect = _connectionService.GetStatusConnect().IsConnected ?? false;
-            Update();
         }
 
         private RelayCommand? _clear;
@@ -65,7 +66,6 @@ namespace Shop.WPF.ViewModel.Orders
                     try
                     {
                          await _service.Crear();
-                        Update();
                     }
                     catch (Exception e)
                     {
@@ -83,7 +83,6 @@ namespace Shop.WPF.ViewModel.Orders
                 try
                 {
                     _dialogsConteiner.AddOrderDialog.ShowDialog();
-                    Update();
                 }
                 catch (Exception e)
                 {
@@ -92,7 +91,7 @@ namespace Shop.WPF.ViewModel.Orders
             }, _ => _isConnect);
         }
 
-        private async void Update()
+        private async void Update(IService<OrderDTO> sender, object? eventArgs)
         {
             if (SelectedCustomer is null) return;
             if (_isConnect)

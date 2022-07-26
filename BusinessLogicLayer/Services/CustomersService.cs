@@ -19,6 +19,8 @@ namespace BusinessLogicLayer.Services
             _repositoryOrder = uof.Orders;
         }
 
+        public event IService<CustomerDTO>.NotifyUpdate? NotifyUpdateData;
+
         public async Task Crear()
         {
             await _repositoryOrder.Clear();
@@ -28,11 +30,13 @@ namespace BusinessLogicLayer.Services
         public async Task Create(CustomerDTO entity)
         {
             await _repository.Insert(_mapper.Map<Customer>(entity));
+            NotifyUpdateData?.Invoke(this, null);
         }
 
         public async Task Delete(CustomerDTO entity)
         {
             await _repository.Delete(_mapper.Map<Customer>(entity));
+            NotifyUpdateData?.Invoke(this, null);
         }
 
         public async Task<List<CustomerDTO>> Get()
@@ -48,6 +52,7 @@ namespace BusinessLogicLayer.Services
         public async Task Update(CustomerDTO entity)
         {
             await _repository.Update(_mapper.Map<Customer>(entity));
+            NotifyUpdateData?.Invoke(this, null);
         }
     }
 }

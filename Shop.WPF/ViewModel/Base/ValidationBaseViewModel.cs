@@ -23,6 +23,11 @@ namespace Shop.WPF.ViewModel.Base
         public bool HasErrors => _errors.Count > 0;
 
         /// <summary>
+        /// Указывает валидна ли VM. True - если валидна
+        /// </summary>
+        public bool IsValid => _errors.Count == 0;
+
+        /// <summary>
         /// Событие о ошибке заполнения
         /// </summary>
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged = delegate { };

@@ -17,19 +17,24 @@ namespace BusinessLogicLayer.Services
             _mapper = mapperFactory.OrderMapper;
         }
 
+        public event IService<OrderDTO>.NotifyUpdate? NotifyUpdateData;
+
         public async Task Crear()
         {
             await _repository.Clear();
+            NotifyUpdateData?.Invoke(this, null);
         }
 
         public async Task Create(OrderDTO entity)
         {
             await _repository.Insert(_mapper.Map<Order>(entity));
+            NotifyUpdateData?.Invoke(this, null);
         }
 
         public async Task Delete(OrderDTO entity)
         {
             await _repository.Delete(_mapper.Map<Order>(entity));
+            NotifyUpdateData?.Invoke(this, null);
         }
 
         public async Task<List<OrderDTO>> Get()
@@ -45,6 +50,7 @@ namespace BusinessLogicLayer.Services
         public async Task Update(OrderDTO entity)
         {
             await _repository.Update(_mapper.Map<Order>(entity));
+            NotifyUpdateData?.Invoke(this, null);
         }
     }
 }
