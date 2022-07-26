@@ -3,7 +3,6 @@ using BusinessLogicLayer.Interfaces;
 using Shop.WPF.Infrastructure;
 using Shop.WPF.Interfaces.Dialogs;
 using Shop.WPF.ViewModel.Base;
-using System;
 
 namespace Shop.WPF.ViewModel
 {
@@ -21,7 +20,10 @@ namespace Shop.WPF.ViewModel
                 IAuthorizationMSSQLDialog dialog = _dialogsConteiner.AuthorizationMSSQLDialog;
                 
                 dialog.ShowDialog();
-                DataSourceName = "Loading...";
+                if (dialog.ResultDialog())
+                {
+                    DataSourceName = "Loading...";
+                }
 
             }, _ => IsConnect == 0);
         }

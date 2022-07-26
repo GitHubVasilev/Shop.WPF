@@ -6,6 +6,7 @@ using Shop.WPF.Interfaces.Dialogs;
 using Shop.WPF.ViewModel.Base;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace Shop.WPF.ViewModel.Customers
 {
@@ -59,8 +60,12 @@ namespace Shop.WPF.ViewModel.Customers
         {
             get => _addCustomer ??= new RelayCommand(obj =>
             {
-                _dialogs.AddCustomerDialog.ShowDialog();
-                Update();
+                IAddCustomerDialog dialog = _dialogs.AddCustomerDialog;
+                dialog.ShowDialog();
+                if (dialog.ResultDialog()) 
+                {
+                    Update();
+                }
             }, _ => _isConnect);
         }
 
@@ -105,6 +110,7 @@ namespace Shop.WPF.ViewModel.Customers
 
         private async void Update()
         {
+            Debug.WriteLine("Update");
             if (_isConnect)
             {
                 try

@@ -4,6 +4,7 @@ using Shop.WPF.Infrastructure;
 using Shop.WPF.Interfaces.Dialogs;
 using Shop.WPF.ViewModel.Base;
 using System;
+using System.Threading.Tasks;
 
 namespace Shop.WPF.ViewModel.Customers
 {
@@ -39,6 +40,7 @@ namespace Shop.WPF.ViewModel.Customers
             {
                 try
                 {
+                    await Task.Delay(2000);
                     await _service.Create(Customer.BaseModel);
                     _dialogsConteiner.MessageDialog.ShowDialog("Create Customer Success");
                 }

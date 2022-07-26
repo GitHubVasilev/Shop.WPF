@@ -21,7 +21,10 @@ namespace Shop.WPF.ViewModel
                 IAuthorizationOleDBDialog dialog = _dialogsConteiner.AuthorizationOleDBDialog;
 
                 dialog.ShowDialog();
-                DataSourceName = "Loading...";
+                if (dialog.ResultDialog()) 
+                {
+                    DataSourceName = "Loading...";
+                }
             }, _ => IsConnect == 0);
         }
     }

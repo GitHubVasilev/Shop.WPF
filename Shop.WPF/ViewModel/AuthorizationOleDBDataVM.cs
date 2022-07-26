@@ -62,7 +62,6 @@ namespace Shop.WPF.ViewModel
                 }
                 catch (System.Exception e)
                 {
-                    await _serviceConnectDB.Disconect();
                     _dialogConteiner.ErrorDialog.ShowDialog(e.Message);
                 }
                        
