@@ -6,7 +6,7 @@
     public record DataConnectionDBDTO
     {
         /// <summary>
-        /// строка подключения
+        /// Строка подключения
         /// </summary>
         public string? DataSourceName { get; init; }
         /// <summary>
@@ -14,6 +14,6 @@
         /// True - подключено
         /// False - отключено
         /// </summary>
-        public bool? IsConnected { get; init; }
+        public bool? IsConnect { get; init; }
     }
 }

@@ -6,6 +6,9 @@ using DataAccessLayer.Entities;
 
 namespace BusinessLogicLayer.Infrastructure.MapperConfig
 {
+    /// <summary>
+    /// Конфигурация конвертера <see cref="AutoMapper"/>  для Покупателей
+    /// </summary>
     internal class CustomerMapperConfiguration : Profile
     {
         public CustomerMapperConfiguration()

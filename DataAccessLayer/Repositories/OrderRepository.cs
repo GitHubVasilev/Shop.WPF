@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
+    /// <summary>
+    /// Класс для взаимодействия с источником данных с Заказами
+    /// </summary>
     internal class OrderRepository : IRepository<Order>
     {
         private IMSSQLContext<Order> _dbContext;
@@ -16,29 +19,54 @@ namespace DataAccessLayer.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task Clear()
+        /// <summary>
+        /// Удаляет данные о всех заказах в источнике данных
+        /// </summary>
+        /// <returns></returns>
+        public async Task ClearAsync()
         {
-            await _dbContext.RunCommand("EXEC deleteOrders");
+            await _dbContext.RunCommandAsync("EXEC deleteOrders");
         }
 
-        public Task Delete(Order entity)
+        /// <summary>
+        /// Асинхронный метод создает запрос на удаления записи о заказе в источнике данных
+        /// НЕ РЕАЛИЗОВАНО
+        /// </summary>
+        /// <param name="entity">Запись для удаления</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Task DeleteAsync(Order entity)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Order>> Get()
+        /// <summary>
+        /// Асинхронный метод создает запрос на получения данных о заказах
+        /// </summary>
+        /// <returns>Список заказов</returns>
+        public async Task<IEnumerable<Order>> GetAsync()
         {
-            return await _dbContext.GetTable();
+            return await _dbContext.GetTableAsync();
         }
 
-        public async Task<IEnumerable<Order>> Get(Func<Order, bool> predicate)
+        /// <summary>
+        /// Асинхронный метод создает запрос на получения данных о заказах отфильтрованных по условию
+        /// </summary>
+        /// <param name="predicate">Условие для фильтрации</param>
+        /// <returns>Список заказов</returns>
+        public async Task<IEnumerable<Order>> GetAsync(Func<Order, bool> predicate)
         {
-            return (await _dbContext.GetTable()).Where(predicate);
+            return (await _dbContext.GetTableAsync()).Where(predicate);
         }
 
-        public async Task Insert(Order entity)
+        /// <summary>
+        /// Асинхронный метод создает запрос на добавление данных в источник данных
+        /// </summary>
+        /// <param name="entity">Запись для добваления</param>
+        /// <returns></returns>
+        public async Task InsertAsync(Order entity)
         {
-            await _dbContext.RunCommand(
+            await _dbContext.RunCommandAsync(
                 "EXEC createOrder " +
                 $"@UID='{entity.UID}', " +
                 $"@email='{entity.EmailCustomer}', " +
@@ -47,7 +75,14 @@ namespace DataAccessLayer.Repositories
             );
         }
 
-        public Task Update(Order entity)
+        /// <summary>
+        /// Асинхронный метод создает запрос на обновление записи в источнике данных
+        /// НЕ РЕАЛИЗОВАН
+        /// </summary>
+        /// <param name="entity">Запись для обновления</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Task UpdateAsync(Order entity)
         {
             throw new NotImplementedException();
         }

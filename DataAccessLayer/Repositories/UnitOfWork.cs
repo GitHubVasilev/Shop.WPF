@@ -5,10 +5,16 @@ using System;
 
 namespace DataAccessLayer.Repositories
 {
+    /// <summary>
+    /// Класса предоставляющего доступ к репозиториям
+    /// </summary>
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
 
         private IRepository<Customer>? _customerRepository;
+        /// <summary>
+        /// Класс для взаимодействия с источником данных с Покупателями
+        /// </summary>
         public IRepository<Customer> Customers 
         {
             get 
@@ -20,6 +26,9 @@ namespace DataAccessLayer.Repositories
         }
 
         private IRepository<Order>? _orderRepository;
+        /// <summary>
+        /// Класс для взаимодействия с источником данных с Заказами
+        /// </summary>
         public IRepository<Order> Orders 
         {
             get 
@@ -32,6 +41,9 @@ namespace DataAccessLayer.Repositories
 
 
         private IMSSQLContext<Order>? _ordersConnect;
+        /// <summary>
+        /// Класс для взаимодействия с источником данных с заказми
+        /// </summary>
         public IMSSQLContext<Order> OrdersConnect
         {
             get 
@@ -43,6 +55,9 @@ namespace DataAccessLayer.Repositories
         }
 
         private IOleDBContext<Customer>? _customersContext;
+        /// <summary>
+        /// Класс для взаимодействия с источником данных с покупателями
+        /// </summary>
         public IOleDBContext<Customer> CustomrsConnect 
         {
             get 

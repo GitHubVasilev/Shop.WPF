@@ -5,7 +5,7 @@ using DataAccessLayer.Entities;
 namespace BusinessLogicLayer.Infrastructure.ConvertersMapper
 {
     /// <summary>
-    /// Automapper 
+    /// Automapper конвертер ДТО Покупателя в модель Покупателя
     /// </summary>
     internal class CustomerDTOToModelConverter : ITypeConverter<CustomerDTO, Customer>
     {

@@ -1,2 +1,2 @@
-Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\PycharmProjects\C#\SkillBox\Homework_17\MSAccessShop.accdb;OLE DB Services=1
+Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\PycharmProjects\C#\SkillBox\Homework_17\MSAccessShop.accdb
 Data Source=(localDB)\MSSQLLocalDB;Initial Catalog=MSSQLShopDB;Integrated Security=True

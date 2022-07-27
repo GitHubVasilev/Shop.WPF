@@ -4,11 +4,20 @@ using DataAccessLayer.Interfaces;
 
 namespace BusinessLogicLayer.Services
 {
+    /// <summary>
+    /// Класс для авториации в источнике данных MS SQL
+    /// </summary>
     public class AuthorizationMSSQLService : IAuthorizationService<AuthorizationMSSQLDataDTO>
     {
         private readonly IUnitOfWork _unitOfWork;
 
+        /// <summary>
+        /// Событие оповещает о подключении к источнику данных
+        /// </summary>
         public event IAuthorizationService<AuthorizationMSSQLDataDTO>.Connection? ConnectionEvent;
+        /// <summary>
+        /// Событие оповещает об отелючения от источника данных
+        /// </summary>
         public event IAuthorizationService<AuthorizationMSSQLDataDTO>.Disconnection? DisconnectonEvent;
 
         public AuthorizationMSSQLService(IUnitOfWork unitOfWork)
@@ -16,24 +25,37 @@ namespace BusinessLogicLayer.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Connect(AuthorizationMSSQLDataDTO dataAuthorization)
+        /// <summary>
+        /// Создает подключение к источнику данных
+        /// </summary>
+        /// <param name="dataAuthorization">Данные для подключения источнику данных</param>
+        /// <returns>Асинхронная задача</returns>
+        public async Task ConnectAsync(AuthorizationMSSQLDataDTO dataAuthorization)
         {
-            await _unitOfWork.OrdersConnect.Connect(dataAuthorization.DataSourceName ?? "");
+            await _unitOfWork.OrdersConnect.ConnectAsync(dataAuthorization.DataSourceName ?? "");
             ConnectionEvent?.Invoke(this, GetStatusConnect());
         }
 
-        public async Task Disconect()
+        /// <summary>
+        /// Отключает от источника данных
+        /// </summary>
+        /// <returns>Асинхронная задача</returns>
+        public async Task DisconectAsync()
         {
-            await _unitOfWork.OrdersConnect.Disconnect();
+            await _unitOfWork.OrdersConnect.DisconnectAsync();
             DisconnectonEvent?.Invoke(this, GetStatusConnect());
         }
 
+        /// <summary>
+        /// Запрашивает статус подключения к источнику данных
+        /// </summary>
+        /// <returns>Данные о поключении</returns>
         public DataConnectionDBDTO GetStatusConnect()
         {
             return new DataConnectionDBDTO()
             {
                 DataSourceName = _unitOfWork.OrdersConnect.DatabaseName,
-                IsConnected = _unitOfWork.OrdersConnect.IsEnabled,
+                IsConnect = _unitOfWork.OrdersConnect.IsEnabled,
             };
         }
     }

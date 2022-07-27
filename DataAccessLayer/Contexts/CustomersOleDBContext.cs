@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Contexts
 {
+    /// <summary>
+    /// Класс для упралвения источником данных о Покупателях
+    /// </summary>
     internal class CustomersOleDBContext : IOleDBContext<Customer>, IDisposable
     {
         private readonly OleDbConnection _connection;
@@ -17,11 +20,25 @@ namespace DataAccessLayer.Contexts
             _connection = new OleDbConnection();
         }
 
+        /// <summary>
+        /// Строка подключения
+        /// </summary>
         public string DatabaseName => _connection.Database;
 
+        /// <summary>
+        /// Статус подключения. True - подключено, False - отключено
+        /// </summary>
         public bool IsEnabled => _connection.State > 0;
 
-        public async Task Connect(string initalCatalog, string login, string password) 
+        /// <summary>
+        /// Создает запрос на подключения к источнику данных
+        /// </summary>
+        /// <param name="initalCatalog">Строка подключния</param>
+        /// <param name="login">Логин</param>
+        /// <param name="password">Пароль</param>
+        /// <returns></returns>
+        /// <exception cref="AccessViolationException"></exception>
+        public async Task ConnectAsync(string initalCatalog, string login, string password) 
         {
             //OleDbConnectionStringBuilder connectionString = new OleDbConnectionStringBuilder()
             //{
@@ -52,7 +69,11 @@ namespace DataAccessLayer.Contexts
             }   
         }
 
-        public async Task Disconnect() 
+        /// <summary>
+        /// Создает запрос на отключения от источника данных
+        /// </summary>
+        /// <returns></returns>
+        public async Task DisconnectAsync() 
         {
             if (_connection.State != 0) 
             {
@@ -60,7 +81,11 @@ namespace DataAccessLayer.Contexts
             }
         }
 
-        public async Task<IEnumerable<Customer>> GetTable()
+        /// <summary>
+        /// Асинхронный метод создает запрос на получения данных из таблицы
+        /// </summary>
+        /// <returns>Таблица данных о покупателях</returns>
+        public async Task<IEnumerable<Customer>> GetTableAsync()
         {
             OleDbCommand command = new OleDbCommand("SELECT * FROM Customers", _connection);
             OleDbDataReader reader = command.ExecuteReader();
@@ -82,7 +107,12 @@ namespace DataAccessLayer.Contexts
             return result;
         }
 
-        public async Task RunCommand(string command)
+        /// <summary>
+        /// Создает запрос на выполения команды в источнике данных
+        /// </summary>
+        /// <param name="command">Команда для выполения</param>
+        /// <returns></returns>
+        public async Task RunCommandAsync(string command)
         {
             OleDbCommand cmd = new OleDbCommand(command, _connection);
             await cmd.ExecuteNonQueryAsync();
@@ -90,7 +120,7 @@ namespace DataAccessLayer.Contexts
 
         public void Dispose()
         {
-            Disconnect();
+            _connection.Close();
         }
     }
 }

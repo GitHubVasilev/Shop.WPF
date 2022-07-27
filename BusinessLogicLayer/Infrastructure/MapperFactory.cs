@@ -4,10 +4,16 @@ using BusinessLogicLayer.Interfaces;
 
 namespace BusinessLogicLayer.Infrastructure
 {
+    /// <summary>
+    /// Собирательный класс для объектов <see cref="IMapper"/>
+    /// </summary>
     internal class MapperFactory : IMapperFactory
     {
 
         private IMapper? _mapperOrder;
+        /// <summary>
+        /// Маппер для Заказов 
+        /// </summary>
         public IMapper OrderMapper 
         {
             get 
@@ -24,6 +30,9 @@ namespace BusinessLogicLayer.Infrastructure
         }
 
         private IMapper? _customerMapper;
+        /// <summary>
+        /// Маппер для Клиентов
+        /// </summary>
         public IMapper CustomerMapper 
         {
             get 

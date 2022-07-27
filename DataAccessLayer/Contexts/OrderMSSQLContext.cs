@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Contexts
 {
+    /// <summary>
+    /// Класс для упралвения источником данных о Заказах
+    /// </summary>
     internal class OrderMSSQLContext : IMSSQLContext<Order>, IDisposable
     {
         private readonly SqlConnection _connection;
@@ -16,11 +19,23 @@ namespace DataAccessLayer.Contexts
             _connection = new();
         }
 
+        /// <summary>
+        /// Статус подключения. True - подключено, False - отключено
+        /// </summary>
         public bool IsEnabled => _connection.State > 0;
 
+        /// <summary>
+        /// Строка подключения
+        /// </summary>
         public string DatabaseName => _connection.Database;
 
-        public async Task Connect(string initialCatalog)
+        /// <summary>
+        /// Создает запрос на подключения к источнику данных
+        /// </summary>
+        /// <param name="initialCatalog">Строка подключния</param>
+        /// <returns></returns>
+        /// <exception cref="AccessViolationException"></exception>
+        public async Task ConnectAsync(string initialCatalog)
         {
             //SqlConnectionStringBuilder connectionString = new SqlConnectionStringBuilder()
             //{
@@ -37,15 +52,23 @@ namespace DataAccessLayer.Contexts
             await _connection.OpenAsync();
         }
 
-        public async Task Disconnect()
+        /// <summary>
+        /// Создает запрос на отключения от источника данных
+        /// </summary>
+        /// <returns></returns>
+        public async Task DisconnectAsync()
         {
             if (!(_connection.State == 0)) 
             {
                 await _connection.CloseAsync();
             }    
-        } 
+        }
 
-        public async Task<IEnumerable<Order>> GetTable()
+        /// <summary>
+        /// Асинхронный метод создает запрос на получения данных из таблицы
+        /// </summary>
+        /// <returns>Таблица данных о заказах</returns>
+        public async Task<IEnumerable<Order>> GetTableAsync()
         {
             SqlCommand command = new("SELECT * FROM Orders", _connection);
             SqlDataReader reader = command.ExecuteReader();
@@ -67,7 +90,12 @@ namespace DataAccessLayer.Contexts
 
         }
 
-        public async Task RunCommand(string command)
+        /// <summary>
+        /// Создает запрос на выполения команды в источнике данных
+        /// </summary>
+        /// <param name="command">Команда для выполения</param>
+        /// <returns></returns>
+        public async Task RunCommandAsync(string command)
         {
             SqlCommand cmd = new(command, _connection);
 

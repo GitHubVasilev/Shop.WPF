@@ -4,11 +4,20 @@ using DataAccessLayer.Interfaces;
 
 namespace BusinessLogicLayer.Services
 {
+    /// <summary>
+    /// Класс для авторизации в источнике данных MS Access
+    /// </summary>
     public class AuthorizationOleDBService : IAuthorizationService<AuthorizationOleDBDataDTO>
     {
         private readonly IUnitOfWork _unitOfWork;
 
+        /// <summary>
+        /// Событие оповещающее о подключении к источнику данных
+        /// </summary>
         public event IAuthorizationService<AuthorizationOleDBDataDTO>.Connection? ConnectionEvent;
+        /// <summary>
+        /// Событие оповещающее об отключении от источника данных
+        /// </summary>
         public event IAuthorizationService<AuthorizationOleDBDataDTO>.Disconnection? DisconnectonEvent;
 
         public AuthorizationOleDBService(IUnitOfWork unitOfWork)
@@ -16,27 +25,40 @@ namespace BusinessLogicLayer.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Connect(AuthorizationOleDBDataDTO dataAuthorization)
+        /// <summary>
+        /// Асинхронный метод запрос на подключение к источнику данных
+        /// </summary>
+        /// <param name="dataAuthorization">Данные для подключения к источнику данных</param>
+        /// <returns>Асинхронная задача</returns>
+        public async Task ConnectAsync(AuthorizationOleDBDataDTO dataAuthorization)
         {
-            await _unitOfWork.CustomrsConnect.Connect(
+            await _unitOfWork.CustomrsConnect.ConnectAsync(
                 dataAuthorization.DataSourceName ?? "",
                 dataAuthorization.Login ?? "",
                 dataAuthorization.Password ?? "");
             ConnectionEvent?.Invoke(this, GetStatusConnect());
         }
 
-        public async Task Disconect()
+        /// <summary>
+        /// Асинхронный метод Создает запрос на отключения от источника дынных
+        /// </summary>
+        /// <returns>Асинхронная задача</returns>
+        public async Task DisconectAsync()
         {
-            await _unitOfWork.CustomrsConnect.Disconnect();
+            await _unitOfWork.CustomrsConnect.DisconnectAsync();
             DisconnectonEvent?.Invoke(this, GetStatusConnect());
         }
 
+        /// <summary>
+        /// Создает запрос о статусе подклчения
+        /// </summary>
+        /// <returns>Данные о подключении</returns>
         public DataConnectionDBDTO GetStatusConnect()
         {
             return new DataConnectionDBDTO()
             {
                 DataSourceName = _unitOfWork.CustomrsConnect.DatabaseName,
-                IsConnected = _unitOfWork.CustomrsConnect.IsEnabled
+                IsConnect = _unitOfWork.CustomrsConnect.IsEnabled
             };
         }
     }
