@@ -10,6 +10,9 @@ using System.Collections.ObjectModel;
 
 namespace Shop.WPF.ViewModel.Orders
 {
+    /// <summary>
+    /// Модель предстваления обработки заказов
+    /// </summary>
     internal class OrdersVM : BaseViewModel
     {
         private readonly IService<OrderDTO> _service;
@@ -17,8 +20,8 @@ namespace Shop.WPF.ViewModel.Orders
         private readonly IAuthorizationService<AuthorizationOleDBDataDTO> _connectionService;
 
         public OrdersVM(IService<OrderDTO> service,
-                                  IDialogsConteiner dialogConteiner,
-                                  IAuthorizationService<AuthorizationOleDBDataDTO> connectionService)
+                        IDialogsConteiner dialogConteiner,
+                        IAuthorizationService<AuthorizationOleDBDataDTO> connectionService)
         {
             _dialogsConteiner = dialogConteiner;
             _service = service;
@@ -29,13 +32,16 @@ namespace Shop.WPF.ViewModel.Orders
             _connectionService.DisconnectonEvent += ConnectionOrDisconection;
             _service.NotifyUpdateData += Update;
 
-            _isConnect = _connectionService.GetStatusConnect().IsConnected ?? false;
+            _isConnect = _connectionService.GetStatusConnect().IsConnect ?? false;
         }
 
         private bool _isConnect;
 
         private CustomerVM? _selectedCustomer;
 
+        /// <summary>
+        /// Покупатель - владелец заказов
+        /// </summary>
         public CustomerVM? SelectedCustomer
         {
             get => _selectedCustomer;
@@ -47,14 +53,20 @@ namespace Shop.WPF.ViewModel.Orders
             }
         }
 
+        /// <summary>
+        /// Список заказов
+        /// </summary>
         public ObservableCollection<OrderVM> Orders { get; }
 
         private void ConnectionOrDisconection(IAuthorizationService<AuthorizationOleDBDataDTO> sender, DataConnectionDBDTO eventArgs)
         {
-            _isConnect = _connectionService.GetStatusConnect().IsConnected ?? false;
+            _isConnect = _connectionService.GetStatusConnect().IsConnect ?? false;
         }
 
         private RelayCommand? _clear;
+        /// <summary>
+        /// Команда для очистки списка заказов в источнике данных
+        /// </summary>
         public RelayCommand ClearCommand
         {
             get => _clear ??= new RelayCommand(async obj =>
@@ -65,7 +77,7 @@ namespace Shop.WPF.ViewModel.Orders
                 {
                     try
                     {
-                         await _service.Crear();
+                         await _service.CrearAsync();
                     }
                     catch (Exception e)
                     {
@@ -76,6 +88,9 @@ namespace Shop.WPF.ViewModel.Orders
         }
 
         private RelayCommand? _addOrder;
+        /// <summary>
+        /// Команда добавления нового заказа
+        /// </summary>
         public RelayCommand AddOrderCommand
         {
             get => _addOrder ??= new RelayCommand(obj =>
@@ -99,7 +114,7 @@ namespace Shop.WPF.ViewModel.Orders
                 try
                 {
                     Orders.Clear();
-                    foreach (OrderDTO order in await _service.Get(SelectedCustomer!.Email!))
+                    foreach (OrderDTO order in await _service.GetAsync(SelectedCustomer!.Email!))
                     {
                         Orders.Add(new OrderVM(order));
                     }

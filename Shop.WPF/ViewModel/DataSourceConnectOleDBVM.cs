@@ -7,6 +7,9 @@ using System;
 
 namespace Shop.WPF.ViewModel
 {
+    /// <summary>
+    /// Модель представления инфомации об источнике данных MS Access
+    /// </summary>
     internal class DataSourceConnectOleDBVM : DataSourceConnectVM<AuthorizationOleDBDataDTO>
     {
         public DataSourceConnectOleDBVM(IAuthorizationService<AuthorizationOleDBDataDTO> serviceAuthorization,
@@ -14,6 +17,9 @@ namespace Shop.WPF.ViewModel
         {
         }
 
+        /// <summary>
+        /// Команда вызывает диалогове окно для подключения к источнику данных
+        /// </summary>
         public override RelayCommand? ConnectCommand
         {
             get => _connectCommand ??= new RelayCommand(obj =>

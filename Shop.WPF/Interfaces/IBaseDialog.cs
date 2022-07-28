@@ -1,5 +1,8 @@
 ﻿namespace Shop.WPF.Interfaces
 {
+    /// <summary>
+    /// Базовый интерфейс для диалогового окна
+    /// </summary>
     internal interface IBaseDialog
     {
         /// <summary>

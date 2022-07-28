@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Shop.WPF.ViewModel.Orders
 {
+    /// <summary>
+    /// Модель предстваления заказа
+    /// </summary>
     internal class OrderVM : ValidationBaseViewModel
     {
         public OrderVM(OrderDTO? order = null)
@@ -16,6 +19,9 @@ namespace Shop.WPF.ViewModel.Orders
             NameProduct = orderDTO.NameProduct ?? "";
         }
 
+        /// <summary>
+        /// Модель для передачи данных
+        /// </summary>
         public OrderDTO BaseModel => new OrderDTO()
         {
             UID = _UID,
@@ -27,6 +33,9 @@ namespace Shop.WPF.ViewModel.Orders
         private Guid _UID { get; set; }
 
         private string? _email;
+        /// <summary>
+        /// Почтовый ящик покупателя - владельца заказа
+        /// </summary>
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         public string? Email 
         {
@@ -35,6 +44,9 @@ namespace Shop.WPF.ViewModel.Orders
         }
 
         private string? _nameProduct;
+        /// <summary>
+        /// Название продукта
+        /// </summary>
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         public string? NameProduct 
         {
@@ -43,6 +55,9 @@ namespace Shop.WPF.ViewModel.Orders
         }
 
         private int _article;
+        /// <summary>
+        /// Под товара
+        /// </summary>
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         public int Article 
         {

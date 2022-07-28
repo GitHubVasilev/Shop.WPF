@@ -31,7 +31,7 @@ namespace BusinessLogicLayer.Services
         /// <returns></returns>
         public async Task CrearAsync()
         {
-            await _repository.Clear();
+            await _repository.ClearAsync();
             NotifyUpdateData?.Invoke(this, null);
         }
 
@@ -42,7 +42,7 @@ namespace BusinessLogicLayer.Services
         /// <returns></returns>
         public async Task CreateAsync(OrderDTO entity)
         {
-            await _repository.Insert(_mapper.Map<Order>(entity));
+            await _repository.InsertAsync(_mapper.Map<Order>(entity));
             NotifyUpdateData?.Invoke(this, null);
         }
 
@@ -54,9 +54,9 @@ namespace BusinessLogicLayer.Services
         /// <exception cref="ArgumentException"></exception>
         public async Task DeleteAsync(OrderDTO entity)
         {
-            if ((await _repository.Get(m => entity.Email == m.EmailCustomer)).Count() == 0)
+            if ((await _repository.GetAsync(m => entity.Email == m.EmailCustomer)).Any())
             { throw new ArgumentException($"Entity with email {entity.Email} not find"); }
-            await _repository.Delete(_mapper.Map<Order>(entity));
+            await _repository.DeleteAsync(_mapper.Map<Order>(entity));
             NotifyUpdateData?.Invoke(this, null);
         }
 
@@ -66,7 +66,7 @@ namespace BusinessLogicLayer.Services
         /// <returns></returns>
         public async Task<List<OrderDTO>> GetAsync()
         {
-            return new(_mapper.Map<List<OrderDTO>>(await _repository.Get()));
+            return new(_mapper.Map<List<OrderDTO>>(await _repository.GetAsync()));
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace BusinessLogicLayer.Services
         /// <returns></returns>
         public async Task<List<OrderDTO>> GetAsync(string email)
         {
-            return _mapper.Map<List<OrderDTO>>(await _repository.Get(m => email == m.EmailCustomer));
+            return _mapper.Map<List<OrderDTO>>(await _repository.GetAsync(m => email == m.EmailCustomer));
         }
 
         /// <summary>
@@ -87,9 +87,9 @@ namespace BusinessLogicLayer.Services
         /// <exception cref="ArgumentException"></exception>
         public async Task UpdateAsync(OrderDTO entity)
         {
-            if ((await _repository.Get(m => entity.Email == m.EmailCustomer)).Count() == 0)
+            if ((await _repository.GetAsync(m => entity.Email == m.EmailCustomer)).Any())
             { throw new ArgumentException($"Entity with email {entity.Email} not find"); }
-            await _repository.Update(_mapper.Map<Order>(entity));
+            await _repository.UpdateAsync(_mapper.Map<Order>(entity));
             NotifyUpdateData?.Invoke(this, null);
         }
     }

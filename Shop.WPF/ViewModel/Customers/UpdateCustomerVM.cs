@@ -38,7 +38,7 @@ namespace Shop.WPF.ViewModel.Customers
             {
                 try
                 {
-                    _service.Update(Customer.BaseModel);
+                    _service.UpdateAsync(Customer.BaseModel);
                     _dialogsConteiner.MessageDialog.ShowDialog($"Customer {Customer.Name!} has been successfully updated");
                 }
                 catch (Exception e) 

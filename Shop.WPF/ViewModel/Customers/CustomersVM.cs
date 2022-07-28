@@ -10,6 +10,9 @@ using System.Diagnostics;
 
 namespace Shop.WPF.ViewModel.Customers
 {
+    /// <summary>
+    /// Модель предстваления для управления пользователями
+    /// </summary>
     internal class CustomersVM : BaseViewModel
     {
         private readonly IService<CustomerDTO> _service;
@@ -34,6 +37,9 @@ namespace Shop.WPF.ViewModel.Customers
         private bool _isConnect;
 
         private ObservableCollection<CustomerVM>? _customers;
+        /// <summary>
+        /// Список пользователей
+        /// </summary>
         public ObservableCollection<CustomerVM> Customers
         {
             get => _customers ?? new ObservableCollection<CustomerVM>();
@@ -45,7 +51,9 @@ namespace Shop.WPF.ViewModel.Customers
         }
 
         private CustomerVM? _selectedCustomer;
-
+        /// <summary>
+        /// Выбранный пользователь
+        /// </summary>
         public CustomerVM? SelectedCustomer 
         {
             get => _selectedCustomer;
@@ -57,7 +65,9 @@ namespace Shop.WPF.ViewModel.Customers
         }
 
         private RelayCommand? _addCustomer;
-
+        /// <summary>
+        /// Команда вызывающее диалоговое окно добавления нового покупателя
+        /// </summary>
         public RelayCommand AddCustomerCommand
         {
             get => _addCustomer ??= new RelayCommand(obj =>
@@ -68,7 +78,9 @@ namespace Shop.WPF.ViewModel.Customers
         }
 
         private RelayCommand? _propertyCustomer;
-
+        /// <summary>
+        /// Команда вызывающее диалоговое окно свойство выбранного покупателя
+        /// </summary>
         public RelayCommand PropertyCustomerCommand
         {
             get => _propertyCustomer ??= new RelayCommand(obj =>
@@ -78,7 +90,9 @@ namespace Shop.WPF.ViewModel.Customers
         }
 
         private RelayCommand? _clearTables;
-
+        /// <summary>
+        /// Команда для очистки таблицы с данными
+        /// </summary>
         public RelayCommand ClearTablesCommand
         {
             get => _clearTables ??= new RelayCommand(obj =>
@@ -89,7 +103,7 @@ namespace Shop.WPF.ViewModel.Customers
                 {
                     try
                     {
-                        _service.Crear();
+                        _service.CrearAsync();
                     }
                     catch (Exception e) 
                     {
@@ -101,7 +115,7 @@ namespace Shop.WPF.ViewModel.Customers
 
         private void ConnectionOrDisconection(IAuthorizationService<AuthorizationOleDBDataDTO> sender, DataConnectionDBDTO eventArgs)
         {
-            _isConnect = _connectionService.GetStatusConnect().IsConnected ?? false;
+            _isConnect = _connectionService.GetStatusConnect().IsConnect ?? false;
             Update(_service, null);
         }
 
@@ -113,7 +127,7 @@ namespace Shop.WPF.ViewModel.Customers
                 try
                 {
                     Customers = new ObservableCollection<CustomerVM>();
-                    foreach (CustomerDTO customer in await _service.Get())
+                    foreach (CustomerDTO customer in await _service.GetAsync())
                     {
                         Customers.Add(new CustomerVM(customer));
                     }

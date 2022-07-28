@@ -12,7 +12,7 @@ namespace DataAccessLayer.Repositories
     /// </summary>
     internal class OrderRepository : IRepository<Order>
     {
-        private IMSSQLContext<Order> _dbContext;
+        private readonly IMSSQLContext<Order> _dbContext;
 
         public OrderRepository(IMSSQLContext<Order> dbContext)
         {

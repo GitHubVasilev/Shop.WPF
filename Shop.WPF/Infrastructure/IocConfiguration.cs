@@ -13,9 +13,17 @@ using Shop.WPF.ViewModel.Orders;
 
 namespace Shop.WPF.Infrastructure
 {
+    /// <summary>
+    /// Класс для инферсии записимости по созданию экземпляров сервисов
+    /// </summary>
     internal class IocConfiguration
     {
-        public IServiceProvider CreateHostBuilder(IServiceCollection services) 
+        /// <summary>
+        /// Создает контейнер с ресурсами приложения
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public IServiceProvider CreateHostBuilder(IServiceCollection? services = null) 
         {
             services ??= new ServiceCollection();
 

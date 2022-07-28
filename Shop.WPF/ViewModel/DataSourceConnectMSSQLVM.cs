@@ -6,6 +6,9 @@ using Shop.WPF.ViewModel.Base;
 
 namespace Shop.WPF.ViewModel
 {
+    /// <summary>
+    /// Модель представления инфомации об источнике данных MS SQL
+    /// </summary>
     internal class DataSourceConnectMSSQLVM : DataSourceConnectVM<AuthorizationMSSQLDataDTO>
     {
         public DataSourceConnectMSSQLVM(IAuthorizationService<AuthorizationMSSQLDataDTO> serviceAuthorization,
@@ -13,6 +16,9 @@ namespace Shop.WPF.ViewModel
         {
         }
 
+        /// <summary>
+        /// Команда вызывает диалогове окно для подключения к источнику данных
+        /// </summary>
         public override RelayCommand? ConnectCommand 
         {
             get => _connectCommand ??= new RelayCommand(obj =>

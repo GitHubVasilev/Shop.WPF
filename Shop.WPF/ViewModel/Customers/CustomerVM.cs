@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Shop.WPF.ViewModel.Customers
 {
+    /// <summary>
+    /// Модель представления для покупателя
+    /// </summary>
     internal class CustomerVM : ValidationBaseViewModel
     {
         public CustomerVM(CustomerDTO? customer = null)
@@ -19,7 +22,9 @@ namespace Shop.WPF.ViewModel.Customers
         }
 
         private Guid _UID { get; set; }
-
+        /// <summary>
+        /// Модель для передачи данных
+        /// </summary>
         public CustomerDTO BaseModel => new CustomerDTO()
         {
             Name = Name,
@@ -31,6 +36,9 @@ namespace Shop.WPF.ViewModel.Customers
         };
 
         private string? _firstName;
+        /// <summary>
+        /// Имя
+        /// </summary>
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         public string? Name 
         {
@@ -39,6 +47,9 @@ namespace Shop.WPF.ViewModel.Customers
         }
 
         private string? _lastName;
+        /// <summary>
+        /// Фамилия
+        /// </summary>
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         public string? Lastname
         {
@@ -47,6 +58,9 @@ namespace Shop.WPF.ViewModel.Customers
         }
 
         private string? _patronymic;
+        /// <summary>
+        /// Отчество
+        /// </summary>
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         public string? Patronymic
         {
@@ -55,6 +69,9 @@ namespace Shop.WPF.ViewModel.Customers
         }
 
         private string? _email;
+        /// <summary>
+        /// Почтовый ящик
+        /// </summary>
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         public string? Email
         {
@@ -63,6 +80,9 @@ namespace Shop.WPF.ViewModel.Customers
         }
 
         private string? _phone;
+        /// <summary>
+        /// Телефон
+        /// </summary>
         public string? Phone
         {
             get => _phone;

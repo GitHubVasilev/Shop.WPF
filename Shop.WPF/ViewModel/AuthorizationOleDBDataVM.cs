@@ -7,6 +7,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Shop.WPF.ViewModel
 {
+    /// <summary>
+    /// Модель предстваления для авторизации в источнике данных MS Access
+    /// </summary>
     internal class AuthorizationOleDBDataVM : ValidationBaseViewModel
     {
         private readonly IAuthorizationService<AuthorizationOleDBDataDTO> _serviceConnectDB;
@@ -19,7 +22,9 @@ namespace Shop.WPF.ViewModel
         }
 
         private string? _dataSourceName;
-
+        /// <summary>
+        /// Строка подключения
+        /// </summary>
         [Required(ErrorMessage = "Not Empty")]
         public string? DataSourceName
         {
@@ -28,7 +33,9 @@ namespace Shop.WPF.ViewModel
         }
 
         private string? _login;
-
+        /// <summary>
+        /// Логин
+        /// </summary>
         [Required(ErrorMessage = "Not Empty")]
         public string? Login 
         {
@@ -37,7 +44,9 @@ namespace Shop.WPF.ViewModel
         }
 
         private string? _password;
-
+        /// <summary>
+        /// Пароль
+        /// </summary>
         [Required(ErrorMessage = "Not Empty")]
         public string? Password 
         {
@@ -46,14 +55,16 @@ namespace Shop.WPF.ViewModel
         }
 
         private RelayCommand? _connectCommand;
-
+        /// <summary>
+        /// Команда для подключения к источнику данных
+        /// </summary>
         public RelayCommand ConnectCommand
         {
             get => _connectCommand ??= new RelayCommand(async obj =>
             {
                 try
                 {
-                    await _serviceConnectDB.Connect(new AuthorizationOleDBDataDTO()
+                    await _serviceConnectDB.ConnectAsync(new AuthorizationOleDBDataDTO()
                     {
                         DataSourceName = DataSourceName,
                         Login = Login,

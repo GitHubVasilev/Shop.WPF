@@ -8,6 +8,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Shop.WPF.ViewModel
 {
+    /// <summary>
+    /// Модель предстваления для авторизации в источнике данных MS SQL
+    /// </summary>
     internal class AuthorizationMSSQLDataVM : ValidationBaseViewModel
     {
         private readonly IAuthorizationService<AuthorizationMSSQLDataDTO> _serviceConnectDB;
@@ -20,7 +23,9 @@ namespace Shop.WPF.ViewModel
         }
 
         private string? _dataSourceName;
-
+        /// <summary>
+        /// Строка соединения
+        /// </summary>
         [Required(ErrorMessage="Not Empty")]
         public string? DataSourceName 
         {
@@ -29,14 +34,16 @@ namespace Shop.WPF.ViewModel
         }
 
         private RelayCommand? _connectCommand;
-
+        /// <summary>
+        /// Команда для подключения к источнику данных
+        /// </summary>
         public RelayCommand ConnectCommand 
         {
             get => _connectCommand ??= new RelayCommand(async obj =>
             {
                 try
                 {
-                    await _serviceConnectDB.Connect(new AuthorizationMSSQLDataDTO() { DataSourceName = DataSourceName });
+                    await _serviceConnectDB.ConnectAsync(new AuthorizationMSSQLDataDTO() { DataSourceName = DataSourceName });
                 }
                 catch (Exception e) 
                 {
