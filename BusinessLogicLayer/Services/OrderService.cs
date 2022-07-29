@@ -61,6 +61,18 @@ namespace BusinessLogicLayer.Services
         }
 
         /// <summary>
+        /// Асинхронный метод удаляет данные отфильтрованные по параметру
+        /// </summary>
+        /// <param name="email">Параметр для фильтрации</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task DeleteAsync(string email)
+        {
+            await _repository.DeleteAsync(email);
+            NotifyUpdateData?.Invoke(this, null);
+        }
+
+        /// <summary>
         /// Асинхронный метод создает запрос на получения записей из источника данных
         /// </summary>
         /// <returns></returns>

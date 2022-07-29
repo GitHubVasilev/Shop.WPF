@@ -34,7 +34,8 @@ namespace BusinessLogicLayer.Services
         public async Task CrearAsync()
         {
             await _repositoryOrder.ClearAsync();
-            await _repository.ClearAsync();  
+            await _repository.ClearAsync();
+            NotifyUpdateData?.Invoke(this, null);
         }
 
         /// <summary>
@@ -60,6 +61,16 @@ namespace BusinessLogicLayer.Services
             { throw new ArgumentException($"Entity with email {entity.Email} not find"); }
             await _repository.DeleteAsync(_mapper.Map<Customer>(entity));
             NotifyUpdateData?.Invoke(this, null);
+        }
+
+        /// <summary>
+        /// Асинхронный метод удаляет записи отфильтрованные по параметру
+        /// </summary>
+        /// <param name="email">Параметры для фильтрации</param>
+        /// <returns></returns>
+        public Task DeleteAsync(string email)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

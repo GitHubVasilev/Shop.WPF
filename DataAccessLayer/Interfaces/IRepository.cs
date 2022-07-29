@@ -42,6 +42,12 @@ namespace DataAccessLayer.Interfaces
         /// <returns></returns>
         Task DeleteAsync(T entity);
         /// <summary>
+        /// Асинхронный методы создает запрос на удаления данных в источнике отфильтрованных по параметру
+        /// </summary>
+        /// <param name="email">параметр для удаления</param>
+        /// <returns></returns>
+        Task DeleteAsync(string email);
+        /// <summary>
         /// Асинхронный метод создает запрос на удаление данных в источнике
         /// </summary>
         /// <returns></returns>

@@ -44,6 +44,12 @@ namespace BusinessLogicLayer.Interfaces
         /// <returns>Асинхронная задача</returns>
         Task DeleteAsync(T entity);
         /// <summary>
+        /// Асинхронный метод для удаления записи
+        /// </summary>
+        /// <param name="email">Запись для удаления</param>
+        /// <returns>Асинхронная задача</returns>
+        Task DeleteAsync(string email);
+        /// <summary>
         /// Асинхронный метод для очистки источника данных
         /// </summary>
         /// <returns></returns>

@@ -41,6 +41,18 @@ namespace DataAccessLayer.Repositories
         }
 
         /// <summary>
+        /// Асинхронный метод создает запрос на удаления отфильтрованные данных покупателя
+        /// НЕ реализованно
+        /// </summary>
+        /// <param name="email">Параметр для фильтрации</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Task DeleteAsync(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Асинхронный метод создает запрос на получения данных о покупателях
         /// </summary>
         /// <returns>Список покупателей</returns>

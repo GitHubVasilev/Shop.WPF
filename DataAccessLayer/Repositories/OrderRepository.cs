@@ -41,6 +41,16 @@ namespace DataAccessLayer.Repositories
         }
 
         /// <summary>
+        /// Асинхронный метод создает запрос на удаления записей отфильтрованных по параметру
+        /// </summary>
+        /// <param name="email">Фильтр для удаления</param>
+        /// <returns></returns>
+        public async Task DeleteAsync(string email)
+        {
+            await _dbContext.RunCommandAsync($"EXEC deleteOrdersByEmail @email = N'{email}'");
+        }
+
+        /// <summary>
         /// Асинхронный метод создает запрос на получения данных о заказах
         /// </summary>
         /// <returns>Список заказов</returns>

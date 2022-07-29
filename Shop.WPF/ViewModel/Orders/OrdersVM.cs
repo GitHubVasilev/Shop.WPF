@@ -47,6 +47,7 @@ namespace Shop.WPF.ViewModel.Orders
             get => _selectedCustomer;
             set
             {
+                if (value == null) return;
                 _selectedCustomer = new CustomerVM(value?.BaseModel);
                 Update(_service, null);
                 OnPropertyChanged();
@@ -72,19 +73,19 @@ namespace Shop.WPF.ViewModel.Orders
             get => _clear ??= new RelayCommand(async obj =>
             {
                 IWarningDialog dialog = _dialogsConteiner.WarningDialog;
-                dialog.ShowDialog("Do you need to delete all customers?");
+                dialog.ShowDialog("Do you need to delete all orders?");
                 if (dialog.ResultDialog() ?? false)
                 {
                     try
                     {
-                         await _service.CrearAsync();
+                         await _service.DeleteAsync(SelectedCustomer!.Email!);
                     }
                     catch (Exception e)
                     {
                         _dialogsConteiner.ErrorDialog.ShowDialog(e.Message);
                     }
                 }
-            }, _ => _isConnect);
+            }, _ => _isConnect && SelectedCustomer != null);
         }
 
         private RelayCommand? _addOrder;
