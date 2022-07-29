@@ -23,7 +23,7 @@
                            Grid.Column="0"
                            Grid.Row="0"
                            HorizontalAlignment="Right"/>
-                <TextBox Text="{Binding Name, ValidatesOnNotifyDataErrors=True}"
+                <TextBox Text="{Binding Name, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Row="0"
                          Grid.Column="1"
                          x:Name="Name_"/>
@@ -45,7 +45,7 @@
                            Grid.Column="0"
                            Grid.Row="0"
                            HorizontalAlignment="Right"/>
-                <TextBox Text="{Binding Lastname, ValidatesOnNotifyDataErrors=True}"
+                <TextBox Text="{Binding Lastname, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Column="1"
                          Grid.Row="0"
                          x:Name="Lastname"/>
@@ -67,7 +67,7 @@
                            Grid.Column="0"
                            Grid.Row="0"
                            HorizontalAlignment="Right"/>
-                <TextBox Text="{Binding Patronymic, ValidatesOnNotifyDataErrors=True}"
+                <TextBox Text="{Binding Patronymic, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Column="1"
                          Grid.Row="0"
                          x:Name="Patronymic"/>
@@ -89,7 +89,7 @@
                            Grid.Column="0"
                            Grid.Row="0"
                            HorizontalAlignment="Right"/>
-                <TextBox Text="{Binding Email, ValidatesOnNotifyDataErrors=True}"
+                <TextBox Text="{Binding Email, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Column="1"
                          Grid.Row="0"
                          x:Name="Email"/>
@@ -111,7 +111,7 @@
                            Grid.Column="0"
                            Grid.Row="0"
                            HorizontalAlignment="Right"/>
-                <TextBox Text="{Binding Phone, ValidatesOnNotifyDataErrors=True}"
+                <TextBox Text="{Binding Phone, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Column="1"
                          Grid.Row="0"
                          x:Name="Phone"/>

@@ -23,7 +23,7 @@
                            Grid.Column="0"
                            Grid.Row="0"
                            HorizontalAlignment="Right"/>
-                <TextBox Text="{Binding Email, ValidatesOnNotifyDataErrors=True}"
+                <TextBox Text="{Binding Email, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Row="0"
                          Grid.Column="1"
                          x:Name="Email"
@@ -46,7 +46,7 @@
                            Grid.Column="0"
                            Grid.Row="0"
                            HorizontalAlignment="Right"/>
-                <TextBox Text="{Binding Article, ValidatesOnNotifyDataErrors=True}"
+                <TextBox Text="{Binding Article, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Row="0"
                          Grid.Column="1"
                          x:Name="Article"/>
@@ -68,7 +68,7 @@
                            Grid.Column="0"
                            Grid.Row="0"
                            HorizontalAlignment="Right"/>
-                <TextBox Text="{Binding NameProduct, ValidatesOnNotifyDataErrors=True}"
+                <TextBox Text="{Binding NameProduct, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Row="0"
                          Grid.Column="1"
                          x:Name="NameProduct"/>
