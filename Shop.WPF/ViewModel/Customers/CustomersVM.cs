@@ -5,8 +5,9 @@ using Shop.WPF.Infrastructure;
 using Shop.WPF.Interfaces.Dialogs;
 using Shop.WPF.ViewModel.Base;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.Linq;
 
 namespace Shop.WPF.ViewModel.Customers
 {
@@ -121,7 +122,11 @@ namespace Shop.WPF.ViewModel.Customers
 
         private async void Update(IService<CustomerDTO> sender, object? eventArgs)
         {
-            Debug.WriteLine("Update");
+            string selectedCustomer = "";
+            if (SelectedCustomer is not null) 
+            {
+                selectedCustomer = SelectedCustomer.Email ?? "";
+            }
             if (_isConnect)
             {
                 try
@@ -130,6 +135,11 @@ namespace Shop.WPF.ViewModel.Customers
                     foreach (CustomerDTO customer in await _service.GetAsync())
                     {
                         Customers.Add(new CustomerVM(customer));
+                    }
+                    IEnumerable<CustomerVM> findCustomers = Customers.Where(m => m.Email == selectedCustomer);
+                    if (findCustomers.Count() > 0) 
+                    {
+                        SelectedCustomer = findCustomers.First();
                     }
                 }
                 catch (Exception e) 

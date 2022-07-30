@@ -67,7 +67,7 @@ namespace Shop.WPF.Infrastructure
             get 
             {
                 OrdersVM vm = _locator.GetRequiredService<OrdersVM>();
-                vm.SelectedCustomer = (CustomersVM.SelectedCustomer ?? new CustomerVM()).Clone() as CustomerVM;
+                vm.SelectedCustomer = CustomersVM.SelectedCustomer ?? new CustomerVM();
                 return vm;
             }
         }
