@@ -7,6 +7,9 @@ using System;
 
 namespace Shop.WPF.ViewModel.Customers
 {
+    /// <summary>
+    /// Модель представления обновления данных пользователя
+    /// </summary>
     internal class UpdateCustomerVM : BaseViewModel
     {
         private readonly IService<CustomerDTO> _service;
@@ -19,7 +22,9 @@ namespace Shop.WPF.ViewModel.Customers
         }
 
         private CustomerVM? _customer;
-
+        /// <summary>
+        /// Данные пользователя для обновления
+        /// </summary>
         public CustomerVM Customer
         {
             get => _customer ?? new CustomerVM();
@@ -31,7 +36,9 @@ namespace Shop.WPF.ViewModel.Customers
         }
 
         private RelayCommand? _updateCommand;
-
+        /// <summary>
+        /// Команда для обновления данных
+        /// </summary>
         public RelayCommand UpdateCommand 
         {
             get => _updateCommand ??= new RelayCommand(obj => 

@@ -17,10 +17,10 @@
                         Grid.Row="0">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="MS Access"
+                    <TextBlock Text="MS Access Customers"
                                Grid.Column="0"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Right"/>
@@ -30,10 +30,10 @@
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="MSSQLLocalDB"
+                    <TextBlock Text="MSSQLLocalDB Orders"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Right"
                                Grid.Column="0"/>
