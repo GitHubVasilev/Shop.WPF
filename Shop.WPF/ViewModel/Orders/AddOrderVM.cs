@@ -53,7 +53,7 @@ namespace Shop.WPF.ViewModel.Orders
                 {
                     _dialogsConteiner.ErrorDialog.ShowDialog(e.Message);
                 }
-            });
+            }, _ => Order.IsValid);
         }
 
     }

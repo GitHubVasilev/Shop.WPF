@@ -62,6 +62,7 @@ namespace Shop.WPF.ViewModel.Base
         {
             if (!base.Set(ref field, val, propertyName)) { return false; }
             ValidateProperty(propertyName, val);
+            OnPropertyChanged(nameof(IsValid));
             return true;
         }
 

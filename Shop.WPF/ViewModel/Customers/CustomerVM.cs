@@ -8,7 +8,7 @@ namespace Shop.WPF.ViewModel.Customers
     /// <summary>
     /// Модель представления для покупателя
     /// </summary>
-    internal class CustomerVM : ValidationBaseViewModel
+    internal class CustomerVM : ValidationBaseViewModel, ICloneable
     {
         public CustomerVM(CustomerDTO? customer = null)
         {
@@ -87,6 +87,18 @@ namespace Shop.WPF.ViewModel.Customers
         {
             get => _phone;
             set => Set(ref _phone, value, nameof(Phone));
+        }
+
+        public object Clone()
+        {
+            return new CustomerVM(BaseModel)
+            {
+                Name = (string)(Name ?? "").Clone(),
+                Lastname = (string)(Lastname ?? "").Clone(),
+                Patronymic = (string)(Patronymic ?? "").Clone(),
+                Email = (string)(Email ?? "").Clone(),
+                Phone = Phone
+            };
         }
     }
 }

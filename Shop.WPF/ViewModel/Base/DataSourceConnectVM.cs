@@ -23,11 +23,9 @@ namespace Shop.WPF.ViewModel.Base
             _authorizationService = serviceAuthorization;
             DataSourceName = _authorizationService.GetStatusConnect().DataSourceName;
             IsConnect = Convert.ToInt32(_authorizationService.GetStatusConnect().IsConnect);
-            _authorizationService.ConnectionEvent += ConnectionOrDisconnection;
-            _authorizationService.DisconnectonEvent += ConnectionOrDisconnection;
         }
 
-        protected void ConnectionOrDisconnection(IAuthorizationService<T> sender, DataConnectionDBDTO eventArgs)
+        protected void UpdateStatus(DataConnectionDBDTO eventArgs)
         {
             DataSourceName = eventArgs.DataSourceName;
             IsConnect = Convert.ToInt32(eventArgs.IsConnect);
@@ -59,7 +57,7 @@ namespace Shop.WPF.ViewModel.Base
             set 
             {
                 _isConnect = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsConnect));
             }
         }
 
@@ -75,6 +73,8 @@ namespace Shop.WPF.ViewModel.Base
                 try
                 {
                     await _authorizationService.DisconectAsync();
+                    UpdateStatus(_authorizationService.GetStatusConnect());
+                    DataSourceName = "";
                 }
                 catch (Exception e)
                 {

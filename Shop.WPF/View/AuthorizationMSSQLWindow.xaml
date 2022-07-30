@@ -3,13 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Shop.WPF.View"
+        xmlns:localVM="clr-namespace:Shop.WPF.ViewModel"
         mc:Ignorable="d"
         Title="AuthorizationMSSQLWindow"
         Height="140"
-        Width="320"
-        DataContext="{Binding Source={StaticResource locator}, Path=AuthorizationMSSQLDataVM}">
-    <Grid>
+        Width="320">
+    <Grid d:DataContext="{d:DesignInstance {x:Type localVM:AuthorizationMSSQLDataVM}}">
         <StackPanel Orientation="Vertical" 
                     VerticalAlignment="Center">
             <TextBlock Text="Authorization"/>
@@ -32,8 +31,8 @@
                         Margin="5"
                         Grid.Column="0"
                         IsDefault="True"
-                        Command="{Binding ConnectCommand}" 
-                        Click="Button_Click"/>
+                        Click="Button_Click"
+                        IsEnabled="{Binding IsValid}"/>
                 <Button Content="Close"
                         Grid.Column="1"
                         Margin="5" 

@@ -19,10 +19,11 @@ namespace Shop.WPF.ViewModel
 
         /// <summary>
         /// Команда вызывает диалогове окно для подключения к источнику данных
+        /// Создает запрос на подключение к источнику данных
         /// </summary>
         public override RelayCommand? ConnectCommand
         {
-            get => _connectCommand ??= new RelayCommand(obj =>
+            get => _connectCommand ??= new RelayCommand(async obj =>
             {            
                 IAuthorizationOleDBDialog dialog = _dialogsConteiner.AuthorizationOleDBDialog;
 
@@ -30,6 +31,17 @@ namespace Shop.WPF.ViewModel
                 if (dialog.ResultDialog()) 
                 {
                     DataSourceName = "Loading...";
+
+                    try
+                    {
+                        await _authorizationService.ConnectAsync(dialog.DataFromAuthorization.BaseModel);
+                    }
+                    catch (Exception e) 
+                    {
+                        _dialogsConteiner.ErrorDialog.ShowDialog(e.Message);
+                    }
+                    
+                    UpdateStatus(_authorizationService.GetStatusConnect());
                 }
             }, _ => IsConnect == 0);
         }

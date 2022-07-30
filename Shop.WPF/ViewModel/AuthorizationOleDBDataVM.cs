@@ -1,7 +1,4 @@
 ﻿using BusinessLogicLayer.DataTransferObject;
-using BusinessLogicLayer.Interfaces;
-using Shop.WPF.Infrastructure;
-using Shop.WPF.Interfaces.Dialogs;
 using Shop.WPF.ViewModel.Base;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,14 +9,21 @@ namespace Shop.WPF.ViewModel
     /// </summary>
     internal class AuthorizationOleDBDataVM : ValidationBaseViewModel
     {
-        private readonly IAuthorizationService<AuthorizationOleDBDataDTO> _serviceConnectDB;
-        private readonly IDialogsConteiner _dialogConteiner;
-
-        public AuthorizationOleDBDataVM(IAuthorizationService<AuthorizationOleDBDataDTO> serviceConnectDB, IDialogsConteiner dialogConteiner)
+        public AuthorizationOleDBDataVM(AuthorizationOleDBDataDTO? dto=null)
         {
-            _serviceConnectDB = serviceConnectDB;
-            _dialogConteiner = dialogConteiner;
+            AuthorizationOleDBDataDTO _dto = dto ?? new();
+            DataSourceName = _dto.DataSourceName ?? "";
+            Login = _dto.Login ?? "";
+            Password = _dto.Password ?? "";
         }
+
+        public AuthorizationOleDBDataDTO BaseModel =>
+            new AuthorizationOleDBDataDTO()
+            {
+                DataSourceName = DataSourceName,
+                Login = Login,
+                Password = Password
+            };
 
         private string? _dataSourceName;
         /// <summary>
@@ -52,31 +56,6 @@ namespace Shop.WPF.ViewModel
         {
             get => _password;
             set => Set(ref _password, value, nameof(Password));
-        }
-
-        private RelayCommand? _connectCommand;
-        /// <summary>
-        /// Команда для подключения к источнику данных
-        /// </summary>
-        public RelayCommand ConnectCommand
-        {
-            get => _connectCommand ??= new RelayCommand(async obj =>
-            {
-                try
-                {
-                    await _serviceConnectDB.ConnectAsync(new AuthorizationOleDBDataDTO()
-                    {
-                        DataSourceName = DataSourceName,
-                        Login = Login,
-                        Password = Password
-                    });
-                }
-                catch (System.Exception e)
-                {
-                    _dialogConteiner.ErrorDialog.ShowDialog(e.Message);
-                }
-                       
-            }, _ => !this.HasErrors);
         }
     }
 }

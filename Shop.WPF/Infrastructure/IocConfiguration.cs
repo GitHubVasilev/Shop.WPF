@@ -46,8 +46,6 @@ namespace Shop.WPF.Infrastructure
 
             services.AddSingleton<IConnectionProvider<AuthorizationOleDBDataDTO>, DataSourceConnectOleDBVM>();
             services.AddSingleton<IConnectionProvider<AuthorizationMSSQLDataDTO>, DataSourceConnectMSSQLVM>();
-            services.AddTransient<AuthorizationMSSQLDataVM>();
-            services.AddTransient<AuthorizationOleDBDataVM>();
             services.AddTransient<AddCustomerVM>();
             services.AddScoped<CustomersVM>();
             services.AddTransient<AddOrderVM>();

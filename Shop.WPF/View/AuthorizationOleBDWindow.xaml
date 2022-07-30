@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:localVM="clr-namespace:Shop.WPF.ViewModel"
         mc:Ignorable="d"
         Title="AuthorizationOleBDWindow"
         Height="220"
-        Width="340"
-        DataContext="{Binding Source={StaticResource locator}, Path=AuthorizationOleDBDataVM}">
-    <Grid>
+        Width="340">
+    <Grid d:DataContext="{d:DesignInstance {x:Type localVM:AuthorizationOleDBDataVM}}">
         <StackPanel Orientation="Vertical"
                     VerticalAlignment="Center">
             <TextBlock Text="Authorization"/>
@@ -51,8 +51,8 @@
                         Margin="5"
                         Grid.Column="0"
                         IsDefault="True"
-                        Command="{Binding ConnectCommand}"
-                        Click="Button_Click"/>
+                        Click="Button_Click"
+                        IsEnabled="{Binding IsValid}"/>
                 <Button Content="Close"
                         Grid.Column="1"
                         Margin="5" 

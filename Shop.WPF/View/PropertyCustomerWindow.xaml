@@ -9,7 +9,7 @@
         Title="PropertyCustomerWindow"
         Height="450"
         Width="800"
-        >
+        DataContext="{Binding Source={StaticResource locator}, Path=Orders}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35*"/>
@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
         <controls:UpdateCustomerControl Grid.Column="0"/>
         <Grid Grid.Column="1" 
-              DataContext="{Binding Source={StaticResource locator}, Path=Orders}">
+              >
             <Grid.RowDefinitions>
                 <RowDefinition Height="85*"/>
                 <RowDefinition Height="15*"/>

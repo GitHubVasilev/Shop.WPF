@@ -45,7 +45,7 @@ namespace DataAccessLayer.Contexts
             //    Provider = @"Microsoft.ACE.OLEDB.12.0",
             //    DataSource = $"{initalCatalog}",
             //};
-            await Task.Delay(5000);
+            //await Task.Delay(5000);
 
             _connection.ConnectionString = initalCatalog;
 

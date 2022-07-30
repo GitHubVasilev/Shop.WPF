@@ -32,8 +32,16 @@ namespace BusinessLogicLayer.Services
         /// <returns>Асинхронная задача</returns>
         public async Task ConnectAsync(AuthorizationMSSQLDataDTO dataAuthorization)
         {
-            await _unitOfWork.OrdersConnect.ConnectAsync(dataAuthorization.DataSourceName ?? "");
-            ConnectionEvent?.Invoke(this, GetStatusConnect());
+            try
+            {
+                await _unitOfWork.OrdersConnect.ConnectAsync(dataAuthorization.DataSourceName ?? "");
+                ConnectionEvent?.Invoke(this, GetStatusConnect());
+            }
+            catch (Exception e) 
+            {
+                ConnectionEvent?.Invoke(this, GetStatusConnect());
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>

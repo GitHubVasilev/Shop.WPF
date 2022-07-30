@@ -35,18 +35,6 @@ namespace Shop.WPF.Infrastructure
             (_locator.GetRequiredService<IConnectionProvider<AuthorizationMSSQLDataDTO>>() as DataSourceConnectMSSQLVM)!;
 
         /// <summary>
-        /// Модель представления статуса подключения к MS Access
-        /// </summary>
-        public AuthorizationOleDBDataVM AuthorizationOleDBDataVM =>
-            _locator.GetRequiredService<AuthorizationOleDBDataVM>();
-
-        /// <summary>
-        /// Модель представления статуса подключения к MS MSQ
-        /// </summary>
-        public AuthorizationMSSQLDataVM AuthorizationMSSQLDataVM =>
-            _locator.GetRequiredService<AuthorizationMSSQLDataVM>();
-
-        /// <summary>
         /// Модель представления для добавления покупателя
         /// </summary>
         public AddCustomerVM AddCustomersVM =>
@@ -79,7 +67,7 @@ namespace Shop.WPF.Infrastructure
             get 
             {
                 OrdersVM vm = _locator.GetRequiredService<OrdersVM>();
-                vm.SelectedCustomer = CustomersVM.SelectedCustomer;
+                vm.SelectedCustomer = (CustomersVM.SelectedCustomer ?? new CustomerVM()).Clone() as CustomerVM;
                 return vm;
             }
         }

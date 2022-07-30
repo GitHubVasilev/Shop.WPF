@@ -48,7 +48,7 @@ namespace Shop.WPF.ViewModel.Orders
             set
             {
                 if (value == null) return;
-                _selectedCustomer = new CustomerVM(value?.BaseModel);
+                _selectedCustomer = value;
                 Update(_service, null);
                 OnPropertyChanged();
             }

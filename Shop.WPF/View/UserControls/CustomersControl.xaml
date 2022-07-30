@@ -29,7 +29,6 @@
             <Grid>
                 <DataGrid ItemsSource="{Binding Customers}" 
                           AutoGenerateColumns="False"
-                          IsReadOnly="True"
                           ColumnWidth="*"
                           CanUserAddRows="False"
                           SelectedItem="{Binding SelectedCustomer}"

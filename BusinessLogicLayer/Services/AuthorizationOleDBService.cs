@@ -32,11 +32,20 @@ namespace BusinessLogicLayer.Services
         /// <returns>Асинхронная задача</returns>
         public async Task ConnectAsync(AuthorizationOleDBDataDTO dataAuthorization)
         {
-            await _unitOfWork.CustomrsConnect.ConnectAsync(
-                dataAuthorization.DataSourceName ?? "",
-                dataAuthorization.Login ?? "",
-                dataAuthorization.Password ?? "");
-            ConnectionEvent?.Invoke(this, GetStatusConnect());
+            try
+            {
+                await _unitOfWork.CustomrsConnect.ConnectAsync(
+                    dataAuthorization.DataSourceName ?? "",
+                    dataAuthorization.Login ?? "",
+                    dataAuthorization.Password ?? "");
+                ConnectionEvent?.Invoke(this, GetStatusConnect());
+            }
+            catch (Exception e) 
+            {
+                ConnectionEvent?.Invoke(this, GetStatusConnect());
+                throw new Exception(e.Message);
+            }
+            
         }
 
         /// <summary>

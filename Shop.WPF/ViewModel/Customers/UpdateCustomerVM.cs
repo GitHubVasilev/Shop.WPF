@@ -25,7 +25,7 @@ namespace Shop.WPF.ViewModel.Customers
             get => _customer ?? new CustomerVM();
             set
             {
-                _customer = value;
+                _customer = value.Clone() as CustomerVM;
                 OnPropertyChanged();
             }
         }
@@ -45,7 +45,7 @@ namespace Shop.WPF.ViewModel.Customers
                 {
                     _dialogsConteiner.ErrorDialog.ShowDialog(e.Message);
                 }
-            });
+            }, _ => Customer.IsValid);
         }
     }
 }

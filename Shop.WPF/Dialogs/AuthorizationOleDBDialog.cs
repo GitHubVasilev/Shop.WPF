@@ -1,5 +1,6 @@
 ﻿using Shop.WPF.Interfaces.Dialogs;
 using Shop.WPF.View;
+using Shop.WPF.ViewModel;
 
 namespace Shop.WPF.Dialogs
 {
@@ -13,7 +14,14 @@ namespace Shop.WPF.Dialogs
         public AuthorizationOleDBDialog()
         {
             _dialog = new();
+            _dialog.DataContext = new AuthorizationOleDBDataVM();
         }
+
+        /// <summary>
+        /// Данные для авторизации в системе MS Access
+        /// </summary>
+        public AuthorizationOleDBDataVM DataFromAuthorization =>
+            (_dialog.DataContext as AuthorizationOleDBDataVM) ?? new AuthorizationOleDBDataVM();
 
         /// <summary>
         /// Результат выполнения диалогового окна

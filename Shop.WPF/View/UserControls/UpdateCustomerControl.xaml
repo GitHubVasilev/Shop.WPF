@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:Shop.WPF.View.UserControls"
+             xmlns:localVM="clr-namespace:Shop.WPF.ViewModel.Customers"
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="200"
              DataContext="{Binding Source={StaticResource locator}, Path=UpdateCustomerVM}">
